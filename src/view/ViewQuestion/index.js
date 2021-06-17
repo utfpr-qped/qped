@@ -1,13 +1,20 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import { TrueOrFalse, Alternative, Written } from "../../components/AnswerType";
 import { Default, Solved } from "../../components/QuestionActions";
+
 import "./index.css";
+
+// Questions DB
+import { QuestionsDB as questions } from "../../utils/questions";
 
 /**
  * ViewQuestion
  * Display a question and its resolution area
  */
-const ViewQuestion = ({ question }) => {
+const ViewQuestion = ({ match }) => {  
+  const [question, setQuestion] = useState(questions.busca[0])
 
   return (
     <div className="container-fluid">
@@ -16,13 +23,14 @@ const ViewQuestion = ({ question }) => {
         <div className="Instruction col-md-5">
           <div className="body">
             <div className="mb-3">
-              <Link to="/topics" className="h6 text-decoration-none subject">{`← ${question.subject}`}</Link>
+              <Link to="/topics" className="h6 subject">{`← ${question.subject}`}</Link>
             </div>
             <h2 className="h2 mb-3">{question.title}</h2>
             <p className="mb-4">{question.text}</p>
           </div>
 
           <div className="tags mb-6">
+            {/* TODO add key for each mapped element */}
             { question.tags.map(tag => <div className="badge-tags me-1">{tag}</div>) }
           </div>
         </div>
@@ -52,7 +60,7 @@ const ViewQuestion = ({ question }) => {
           </div>
 
           {/* Component where the actions are --> answer the question/next question */}
-          <Solved />
+          <Default />
         </div>
       </div>
     </div>
