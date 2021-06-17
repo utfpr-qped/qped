@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./index.css";
 
 /**
@@ -12,7 +13,9 @@ const ViewQuestion = ({ question }) => {
         {/* AREA: Instruction */}
         <div className="Instruction col-md-5">
           <div className="body">
-            <h6 className="h6 topic text-primary mb-3">{`← ${question.subject}`}</h6>
+            <div className="mb-3">
+              <Link to="/topics" className="h6 text-decoration-none">{`← ${question.subject}`}</Link>
+            </div>
             <h2 className="h2 mb-3">{question.title}</h2>
             <p className="mb-4">{question.text}</p>
           </div>
