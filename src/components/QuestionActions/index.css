@@ -1,0 +1,38 @@
+/* Container for the Answer and Feedback */
+.Resolution .container-actions {
+  display: flex;
+
+  padding: 16px;
+  border: 1px solid var(--lightBorder);
+  border-radius: 4px;
+}
+
+.Resolution .container-actions button {
+  margin-left: 4px;
+}
+
+/* ! Default state */
+.Resolution .container-actions.default {
+  justify-content: flex-end;
+}
+
+/* ! Solved state */
+.Resolution .container-actions.solved {
+  justify-content: space-between;
+  color: white;
+  border: 1px solid var(--secondary);
+  background-color: var(--secondary);
+}
+
+.Resolution .container-actions.solved .answer p {
+  font-weight: 600;
+  color: var(--correct);
+  margin-bottom: 8px;
+}
+
+/* Box for where the correct answer is outputted */
+.Resolution .container-actions.solved .answer > div {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
