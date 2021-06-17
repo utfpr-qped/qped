@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import ViewQuestion from "./view/ViewQuestion";
+import './index.css';
 
 function App() {
+  const [question, setQuestion] = useState({})
+
+  useEffect(() => {
+    setQuestion({
+      id: 'busca-2',
+      title: 'Titulo da questao',
+      text: `Considere o método de busca sequencial em um vetor contendo os elementos: **[{vet=2:23:+{5:10}}]**. 
+  
+  Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **"{valor=2:23}"**?`,
+      // answer: function (vet, valor) {
+      //   for (let i = 0; i < vet.length; i++) {
+      //     if (vet[i] === valor) return i;
+      //   }
+      //   return -1;
+      // },
+      subject: 'Busca',
+      level: 1,
+      tags: ['busca sequencial', 'busca']
+    })
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <ViewQuestion question={question} />
     </div>
   );
 }
