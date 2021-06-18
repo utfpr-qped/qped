@@ -11,12 +11,12 @@ export const questions = {
       text: `Considere o método de busca sequencial em um vetor contendo os elementos: **[{vet=2:23:+{5:10}}]**. 
   
   Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **"{valor=2:23}"**?`,
-      // answer: function (vet, valor) {
-      //   for (let i = 0; i < vet.length; i++) {
-      //     if (vet[i] === valor) return i;
-      //   }
-      //   return -1;
-      // },
+      answer: function (vet, valor) {
+        for (let i = 0; i < vet.length; i++) {
+          if (vet[i] === valor) return i;
+        }
+        return -1;
+      },
       subject: 'Busca',
       level: 1,
       tags: ['busca sequencial', 'busca']
@@ -27,12 +27,12 @@ export const questions = {
       text: `Considere o método de busca sequencial em um vetor contendo os elementos: **[{vet=2:23:+{5:10}}]**. 
   
   Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **"{valor=2:23}"**?`,
-      // answer: function (vet, valor) {
-      //   for (let i = 0; i < vet.length; i++) {
-      //     if (vet[i] === valor) return i;
-      //   }
-      //   return -1;
-      // },
+      answer: function (vet, valor) {
+        for (let i = 0; i < vet.length; i++) {
+          if (vet[i] === valor) return i;
+        }
+        return -1;
+      },
       subject: 'Busca',
       level: 1,
       tags: ['busca sequencial', 'busca']
@@ -45,16 +45,16 @@ export const questions = {
       text: `Considere o método de busca sequencial em um vetor contendo os elementos: **[{vet=2:23:+{5:10}}]**. 
   
   Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **"{valor=2:23}"**?`,
-      // answer: function (vet, valor) {
-      //   for (let i = 0; i < vet.length; i++) {
-      //     if (vet[i] === valor) return i;
-      //   }
-      //   return -1;
-      // },
+      answer: function (vet, valor) {
+        for (let i = 0; i < vet.length; i++) {
+          if (vet[i] === valor) return i;
+        }
+        return -1;
+      },
       subject: 'Pilha',
       level: 1,
       tags: ['pilha']
     }
-  ],
-  fila: []
+  ]
+  //,fila: []
 }
