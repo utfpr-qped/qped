@@ -11,11 +11,12 @@ export const questions = {
       text: `Considere o método de busca sequencial em um vetor contendo os elementos: **[{vet=2:23:+{5:10}}]**. 
   
   Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **"{valor=2:23}"**?`,
-      answer: function (vet, valor) {
+      answer: function answer({ values, userInput }) {
+        const { vet, valor } = values
         for (let i = 0; i < vet.length; i++) {
-          if (vet[i] === valor) return i;
+          if (vet[i] === valor) return true;
         }
-        return -1;
+        return false;
       },
       subject: 'Busca',
       level: 1,
@@ -27,11 +28,33 @@ export const questions = {
       text: `Considere o método de busca sequencial em um vetor contendo os elementos: **[{vet=2:23:+{5:10}}]**. 
   
   Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **"{valor=2:23}"**?`,
-      answer: function (vet, valor) {
+      answer: function answer(vet, valor) {
         for (let i = 0; i < vet.length; i++) {
           if (vet[i] === valor) return i;
         }
         return -1;
+      },
+      subject: 'Busca',
+      level: 1,
+      tags: ['busca sequencial', 'busca']
+    },
+    {
+      id: 'busca-3',
+      title: 'Questao de busca 3',
+      text: `Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\` 
+     Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
+      `,
+      answer: function answer(values, userInput) {
+        const { vet, valor } = values
+        for (let i = 0; i < vet.length; i++) {
+          if (
+            vet[i] === valor &&
+            i + 1 === userInput
+          ) {
+            return true;
+          }
+        }
+        return false
       },
       subject: 'Busca',
       level: 1,
@@ -42,10 +65,10 @@ export const questions = {
     {
       id: 'pilha-1',
       title: 'Questao de pilha 1',
-      text: `Considere o método de busca sequencial em um vetor contendo os elementos: **[{vet=2:23:+{5:10}}]**. 
+      text: `Considere o método de busca sequencial em um vetor contendo os elementos: ** [{ vet=2: 23: +{ 5: 10 } }] **. 
   
-  Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **"{valor=2:23}"**?`,
-      answer: function (vet, valor) {
+  Qual deve ser o retorno da busca quando o usuário pesquisar pelo item ** "{valor=2:23}" **? `,
+      answer: function answer(vet, valor) {
         for (let i = 0; i < vet.length; i++) {
           if (vet[i] === valor) return i;
         }

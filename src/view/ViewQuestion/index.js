@@ -13,7 +13,7 @@ import { questions as database } from "../../utils/index";
  * ViewQuestion
  * Display a question and its resolution area
  */
-const ViewQuestion = ({ match }) => {  
+const ViewQuestion = ({ match }) => {
   const [question, setQuestion] = useState({})
 
   // Level of the answer
@@ -100,7 +100,7 @@ const ViewQuestion = ({ match }) => {
                 </button>*/}
               </div>
             </header>
-            
+
             {/* Body of the resolution area, where a single type of answer is displayed 
 
               Change the input type based on the level state ('facil', 'medio', 'dificil')
@@ -108,10 +108,10 @@ const ViewQuestion = ({ match }) => {
 
               By default, it is the 'easy' state (aka TrueOrFalse input)
             */}
-            
-            { level.easy ? <TrueOrFalse /> : null }
-            { level.medium ? <Alternative /> : null }
-            { level.hard ? <Written /> : null }
+
+            {level.easy ? <TrueOrFalse answerFunction={question.answer} /> : null}
+            {level.medium ? <Alternative /> : null}
+            {level.hard ? <Written /> : null}
           </div>
 
           {/* Component where the actions are --> answer the question/next question */}

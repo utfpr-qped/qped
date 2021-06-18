@@ -23,6 +23,4 @@ for (const topic in rawQuestions) {
   })
 }
 
-console.log(questions)
-
 export { questions }
