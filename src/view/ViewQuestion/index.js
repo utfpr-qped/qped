@@ -46,9 +46,9 @@ const ViewQuestion = ({ match }) => {
 
     // set everything to false, then set only the correct component to true
     let new_level = {
-      easy: false,
-      medium: false,
-      hard: false,
+      test: "test",
+      t: "a",
+      1: 2
     }
 
     new_level[lvlClicked] = true
