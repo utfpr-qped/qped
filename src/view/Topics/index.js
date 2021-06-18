@@ -4,7 +4,7 @@ import TopicSection from "../../components/TopicSection";
 import "./index.css";
 
 // Questions DB
-import { QuestionsDB as questions } from "../../utils/questions";
+import { questions as database } from "../../utils/questions";
 
 const Topics = () => { 
   return (
@@ -13,23 +13,29 @@ const Topics = () => {
         <h1>Tópicos</h1>
       </header>
 
+      {/* 
+        TODO 
+        - find a better way to populate the page with the sections of each topic, 
+          instead of manually calling each section  
+      */}
+
       {
         // ! Tópico de BUSCA
-        questions.busca.length ? (
-          <TopicSection questionList={questions.busca} sectionTitle="Busca" />
+        database.busca.length ? (
+          <TopicSection questionList={database.busca} sectionTitle="Busca" />
         ) : (null)
       }
       {
         // ! Tópico de PILHA
-        questions.pilha.length ? (
-          <TopicSection questionList={questions.pilha} sectionTitle="Pilha" />
+        database.pilha.length ? (
+          <TopicSection questionList={database.pilha} sectionTitle="Pilha" />
         ) : (null)
       }
       
       {
         // ! Tópico de FILA
-        questions.fila.length ? (
-          <TopicSection questionList={questions.fila} sectionTitle="Fila" />
+        database.fila.length ? (
+          <TopicSection questionList={database.fila} sectionTitle="Fila" />
         ) : (null)
       }
     </div>

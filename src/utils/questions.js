@@ -1,7 +1,9 @@
 /**
  * Lists of questions organized in one single object with each topic
+ * 
+ * TODO This list of questions works as dummy data, it needs to be replaced with the correct questions
  */
-export const QuestionsDB = {
+export const questions = {
   busca: [
     {
       id: 'busca-1',

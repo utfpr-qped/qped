@@ -15,7 +15,7 @@ function App() {
 
         <Switch>
           <Route path="/topics" component={Topics} />
-          <Route path="/question/:idQuestion" component={ViewQuestion} />
+          <Route path="/question/:subject/:idQuestion" component={ViewQuestion} />
         </Switch>
       </div>
     </BrowserRouter>

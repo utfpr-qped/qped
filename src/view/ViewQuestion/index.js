@@ -1,27 +1,36 @@
-import { useEffect } from "react";
-// import { Link } from "react-router-dom";
-
-// import { TrueOrFalse, Alternative, Written } from "../../components/AnswerType";
-// import { Default, Solved } from "../../components/QuestionActions";
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+// Components
+import { TrueOrFalse } from "../../components/AnswerType";
+import { Default } from "../../components/QuestionActions";
+// Styles
 import "./index.css";
-
 // Questions DB
-// import { QuestionsDB as questions } from "../../utils/questions";
+import { questions as database } from "../../utils/questions";
 
 /**
  * ViewQuestion
  * Display a question and its resolution area
  */
 const ViewQuestion = ({ match }) => {  
-  // const [question, setQuestion] = useState({})
+  const [question, setQuestion] = useState({})
 
   useEffect(() => {
-    // Encontrar pelo params o id da questao e mostrar
-    
-    
-    console.log(match.params.idQuestion)
-  })
+    /* 
+      * Find the question and display it onscreen
+
+      - Get the question id from the URL
+      - Recover the question from the database by using the 'subject', then the 'id' of the question
+        that is coming from the parameters in the URL
+      - Once it gets the right question, store it in a state so that it is loaded onscreen
+    */
+
+    let subject = match.params.subject
+    let idQuestion = match.params.idQuestion
+    let question = database[`${subject}`].find(element => element.id === idQuestion)
+
+    setQuestion(question)
+  }, [match.params.subject, match.params.idQuestion])
 
   return (
     <div className="container-fluid">
@@ -30,10 +39,10 @@ const ViewQuestion = ({ match }) => {
         <div className="Instruction col-md-5">
           <div className="body">
             <div className="mb-3">
-              {/* <Link to="/topics" className="h6 subject">{`← ${question.subject}`}</Link> */}
+              <Link to="/topics" className="h6 subject">{`← ${question.subject}`}</Link>
             </div>
-            {/* <h2 className="h2 mb-3">{question.title}</h2>
-            <p className="mb-4">{question.text}</p> */}
+            <h2 className="h2 mb-3">{question.title}</h2>
+            <p className="mb-4">{question.text}</p>
           </div>
 
           <div className="tags mb-6">
@@ -63,11 +72,11 @@ const ViewQuestion = ({ match }) => {
             </header>
             
             {/* Body of the resolution area, where a single type of answer is displayed */}
-            {/* <TrueOrFalse /> */}
+            <TrueOrFalse />
           </div>
 
           {/* Component where the actions are --> answer the question/next question */}
-          {/* <Default /> */}
+          <Default />
         </div>
       </div>
     </div>

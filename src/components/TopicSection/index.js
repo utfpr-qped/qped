@@ -6,7 +6,7 @@ const TopicSection = ({ questionList, sectionTitle }) => {
       <h2 className="h4 mb-4">{sectionTitle}</h2>
       { 
         questionList.map(question => 
-          <Link to={`/question/${question.id}`} key={question.id}>{question.title}</Link> 
+          <Link to={`/question/${question.subject.toLowerCase()}/${question.id}`} key={question.id}>{question.title}</Link> 
         ) 
       }
     </section>
