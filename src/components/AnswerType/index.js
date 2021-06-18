@@ -1,23 +1,31 @@
 import "./index.css";
 
-export const TrueOrFalse = () => {
+function verifyAnswer({ answerFunction, input }) {
+  const values = { vet: [10, 20, 30], valor: 10 }
+  // eslint-disable-next-line
+  const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${input})`)
+  alert(answer ? "Correto!" : "Errado :(")
+}
+
+export const TrueOrFalse = ({ answerFunction }) => {
   return (
     <div className="TrueOrFalse mb-3 w-50">
       <label className="form-label">Verifique o resultado abaixo e responda:</label>
-      <textarea className="form-control mb-3" placeholder="10, 15, 14, 84" style={{height: 100 + 'px'}} disabled></textarea>
+      <textarea className="form-control mb-3" placeholder="10, 15, 14, 84" style={{ height: 100 + 'px' }} disabled></textarea>
       <div className="options-container">
         <div className="mb-2">
           <input type="radio" className="btn-check" name="options-outlined" id="option11" autoComplete="off" />
-          <label className="btn btn-outline-dark" htmlFor="option11">
+          <label className="btn btn-outline-dark" htmlFor="option11" onClick={() => verifyAnswer({ answerFunction, input: 1 })}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check2" viewBox="0 0 16 16">
               <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
             </svg>
-            Correto</label>
+            Correto
+          </label>
         </div>
 
         <div className="mb-2">
           <input type="radio" className="btn-check" name="options-outlined" id="option22" autoComplete="off" />
-          <label className="btn btn-outline-dark" htmlFor="option22">
+          <label className="btn btn-outline-dark" htmlFor="option22" onClick={() => verifyAnswer({ answerFunction, input: 2 })}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
             </svg>
@@ -49,7 +57,7 @@ export const Alternative = () => {
     </div>
   );
 }
- 
+
 export const Written = () => {
   return (
     <div className="Written mb-3 w-50">

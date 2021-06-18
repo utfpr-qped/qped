@@ -18,7 +18,6 @@ const Topics = () => {
       </header>
       {
         Object.keys(database).map((topic, index) => {
-          console.log(database[topic])
           return <TopicSection
             questionList={database[topic]}
             sectionTitle={capitalizeFirstLetter(topic)}
