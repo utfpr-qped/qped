@@ -6,7 +6,7 @@ import { Default } from "../../components/QuestionActions";
 // Styles
 import "./index.css";
 // Questions DB
-import { questions as database } from "../../utils/questions";
+import { questions as database } from "../../utils/index";
 
 /**
  * ViewQuestion

@@ -4,42 +4,30 @@ import TopicSection from "../../components/TopicSection";
 import "./index.css";
 
 // Questions DB
-import { questions as database } from "../../utils/questions";
+import { questions as database } from "../../utils/index";
 
-const Topics = () => { 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const Topics = () => {
   return (
     <div className="Topics container w-50">
       <header className="mt-5 mb-4">
         <h1>Tópicos</h1>
       </header>
-
-      {/* 
-        TODO 
-        - find a better way to populate the page with the sections of each topic, 
-          instead of manually calling each section  
-      */}
-
       {
-        // ! Tópico de BUSCA
-        database.busca.length ? (
-          <TopicSection questionList={database.busca} sectionTitle="Busca" />
-        ) : (null)
-      }
-      {
-        // ! Tópico de PILHA
-        database.pilha.length ? (
-          <TopicSection questionList={database.pilha} sectionTitle="Pilha" />
-        ) : (null)
-      }
-      
-      {
-        // ! Tópico de FILA
-        database.fila.length ? (
-          <TopicSection questionList={database.fila} sectionTitle="Fila" />
-        ) : (null)
+        Object.keys(database).map((topic, index) => {
+          console.log(database[topic])
+          return <TopicSection
+            questionList={database[topic]}
+            sectionTitle={capitalizeFirstLetter(topic)}
+            key={index}
+          />
+        })
       }
     </div>
   );
 }
- 
+
 export default Topics;
