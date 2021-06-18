@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import TopicSection from "../../components/TopicSection";
 // import { Link } from "react-router-dom";
 import "./index.css";
