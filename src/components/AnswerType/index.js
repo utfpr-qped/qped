@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import "./index.css";
 
 function verifyAnswer({ answerFunction, input }) {
@@ -58,7 +59,15 @@ export const Alternative = () => {
   );
 }
 
-export const Written = () => {
+export const Written = ({ answerFunction, values }) => {
+  const refTextarea = useRef(null)
+
+  function newVerifyAnswer({ answerFunction, values }) {
+    let input = refTextarea.current.value
+    const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${input})`)
+    alert(answer ? "Correto!" : "Errado :(")
+  }
+  
   return (
     <div className="Written mb-3 w-50">
       <label className="form-label">Digite sua resposta abaixo:</label>
@@ -69,7 +78,8 @@ export const Written = () => {
             <path fillRule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
           </svg>
         </span>
-        <textarea className="form-control" placeholder="Sua resposta..." aria-label="Textarea"></textarea>
+        <textarea className="form-control" placeholder="Sua resposta..." aria-label="Textarea" ref={refTextarea}></textarea>
+        <button onClick={() => newVerifyAnswer({ answerFunction, values })}>Verificar</button>
       </div>
     </div>
   );

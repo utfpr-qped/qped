@@ -42,7 +42,8 @@ export const questions = {
       id: 'busca-3',
       title: 'Questao de busca 3',
       text: `Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\` 
-     Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
+
+Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
       `,
       answer: function answer(values, userInput) {
         const { vet, valor } = values
@@ -54,7 +55,12 @@ export const questions = {
             return true;
           }
         }
-        return false
+
+        // if the value is not in the array, then the correct answer is the size of the array + 1
+        if (userInput === vet.length+1) return true;
+
+        // if the user input doesn't apply to any of the cases above, it is incorrect
+        return false;
       },
       subject: 'Busca',
       level: 1,

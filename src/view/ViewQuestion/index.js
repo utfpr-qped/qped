@@ -111,7 +111,7 @@ const ViewQuestion = ({ match }) => {
 
             {level.easy ? <TrueOrFalse answerFunction={question.answer} /> : null}
             {level.medium ? <Alternative /> : null}
-            {level.hard ? <Written /> : null}
+            {level.hard ? <Written answerFunction={question.answer} values={question.values} /> : null}
           </div>
 
           {/* Component where the actions are --> answer the question/next question */}
