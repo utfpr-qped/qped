@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 // Components
 import { TrueOrFalse } from "../../components/AnswerType";
 import { Default } from "../../components/QuestionActions";
@@ -14,6 +15,8 @@ import { questions as database } from "../../utils/questions";
  */
 const ViewQuestion = ({ match }) => {  
   const [question, setQuestion] = useState({})
+
+  const [markdown, setMarkdown] = useState()
 
   useEffect(() => {
     /* 
@@ -30,6 +33,9 @@ const ViewQuestion = ({ match }) => {
     let question = database[`${subject}`].find(element => element.id === idQuestion)
 
     setQuestion(question)
+
+    // * Store question text in markdown state
+
   }, [match.params.subject, match.params.idQuestion])
 
   return (
@@ -42,7 +48,7 @@ const ViewQuestion = ({ match }) => {
               <Link to="/topics" className="h6 subject">{`← ${question.subject}`}</Link>
             </div>
             <h2 className="h2 mb-3">{question.title}</h2>
-            <p className="mb-4">{question.text}</p>
+            <ReactMarkdown children={question.text} />
           </div>
 
           <div className="tags mb-6">
@@ -56,8 +62,7 @@ const ViewQuestion = ({ match }) => {
           <div>
             <header>
               <h4>Resolva</h4>
-              <div className="box-levels g">
-                {/* TODO rename the buttons */}
+              <div className="box-levels">
                 <button className="btn btn-secondary ms-1">Fácil</button>
                 <button className="btn btn-outline-secondary ms-1">Médio</button>
                 <button className="btn btn-outline-secondary ms-1">Avançado</button>
