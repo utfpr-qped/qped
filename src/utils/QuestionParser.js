@@ -468,11 +468,7 @@ export class QuestionParser {
       .reverse()
       .forEach(token => {
         values.push([token, this.getValue(this.getTokenId(token), this.seed)]);
-        console.log(this.getValue(this.getTokenId(token, this.seed)))
       });
-
-
-
 
     while (values.length > 0) {
       let val = values.pop();

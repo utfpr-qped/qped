@@ -1,22 +1,29 @@
 import { useRef } from "react";
 import "./index.css";
 
-function verifyAnswer({ answerFunction, input }) {
-  const values = { vet: [10, 20, 30], valor: 10 }
-  // eslint-disable-next-line
-  const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${input})`)
-  alert(answer ? "Correto!" : "Errado :(")
-}
 
 export const TrueOrFalse = ({ question }) => {
+  function verifyTrueOrFalseAnswer(input) {
+    const answerFunction = question.verifyAnswer
+    const userInput = input === true ? question.trueOrFalseOptions[0] : question.trueOrFalseOptions[1]
+    const values = question.values
+    // eslint-disable-next-line
+    const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${userInput})`)
+    alert(answer ? "Correto!" : "Errado :(")
+  }
+
   return (
     < div className="TrueOrFalse mb-3 w-50" >
       <label className="form-label">Verifique o resultado abaixo e responda:</label>
-      <textarea className="form-control mb-3" placeholder="10, 15, 14, 84" style={{ height: 100 + 'px' }} disabled></textarea>
+      <textarea className="form-control mb-3" placeholder={question.trueOrFalseOptions[0]} style={{ height: 100 + 'px' }} disabled></textarea>
       <div className="options-container">
         <div className="mb-2">
           <input type="radio" className="btn-check" name="options-outlined" id="option11" autoComplete="off" />
-          <label className="btn btn-outline-dark" htmlFor="option11" onClick={() => verifyAnswer({ answerFunction: question.answerFunction, input: 1 })}>
+          <label
+            className="btn btn-outline-dark"
+            htmlFor="option11"
+            onClick={() => verifyTrueOrFalseAnswer(true)}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check2" viewBox="0 0 16 16">
               <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
             </svg>
@@ -26,7 +33,11 @@ export const TrueOrFalse = ({ question }) => {
 
         <div className="mb-2">
           <input type="radio" className="btn-check" name="options-outlined" id="option22" autoComplete="off" />
-          <label className="btn btn-outline-dark" htmlFor="option22" onClick={() => verifyAnswer({ answerFunction: question.answerFunction, input: 2 })}>
+          <label
+            className="btn btn-outline-dark"
+            htmlFor="option22"
+            onClick={() => verifyTrueOrFalseAnswer(false)}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
             </svg>
@@ -37,23 +48,28 @@ export const TrueOrFalse = ({ question }) => {
   );
 }
 
-export const Alternative = () => {
+export const Alternative = ({ question }) => {
+  function verifyAnswer(optionIndex) {
+    const answerFunction = question.verifyAnswer
+    const userInput = question.options[optionIndex]
+    const values = question.values
+    // eslint-disable-next-line
+    const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${userInput})`)
+    alert(answer ? "Correto!" : "Errado :(")
+  }
   return (
     <div className="Alternative mb-3 w-50">
       <label className="form-label">Selecione a alternativa correta:</label>
       <div className="options-container">
-        <div className="mb-2">
-          <input type="radio" className="btn-check" name="options-outlined" id="option1" autoComplete="off" />
-          <label className="btn btn-outline-dark" htmlFor="option1">100, 15, 14, 84</label>
-        </div>
-        <div className="mb-2">
-          <input type="radio" className="btn-check" name="options-outlined" id="option2" autoComplete="off" />
-          <label className="btn btn-outline-dark" htmlFor="option2">1234, 15, 14, 84</label>
-        </div>
-        <div className="mb-2">
-          <input type="radio" className="btn-check" name="options-outlined" id="option3" autoComplete="off" />
-          <label className="btn btn-outline-dark" htmlFor="option3">78, 54, 15, 14, 84</label>
-        </div>
+        {
+          question.options.map((option, index) => {
+            const id = `option${index + 1}`
+            return <div className="mb-2" key={index} onClick={() => { verifyAnswer(index) }}>
+              <input type="radio" className="btn-check" name="options-outlined" id={id} autoComplete="off" />
+              <label className="btn btn-outline-dark" htmlFor={id}>{option}</label>
+            </div>
+          })
+        }
       </div>
     </div>
   );
@@ -64,10 +80,11 @@ export const Written = ({ answerFunction, values }) => {
 
   function newVerifyAnswer({ answerFunction, values }) {
     let input = refTextarea.current.value
+    // eslint-disable-next-line
     const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${input})`)
     alert(answer ? "Correto!" : "Errado :(")
   }
-  
+
   return (
     <div className="Written mb-3 w-50">
       <label className="form-label">Digite sua resposta abaixo:</label>

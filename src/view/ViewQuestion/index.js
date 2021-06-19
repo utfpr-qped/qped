@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 // Components
@@ -14,7 +14,7 @@ import { rawQuestions, parseQuestion } from "../../utils/index";
  * Display a question and its resolution area
  */
 const ViewQuestion = ({ match }) => {
-  const [question, setQuestion] = useState({})
+  //const [question, setQuestion] = useState({})
 
   // Level of the answer
   const [level, setLevel] = useState({
@@ -23,32 +23,18 @@ const ViewQuestion = ({ match }) => {
     hard: false,
   })
 
-  useEffect(() => {
-    /* 
-      * Find the question and display it onscreen
-
-      - Get the question id from the URL
-      - Recover the question from the database by using the 'subject', then the 'id' of the question
-        that is coming from the parameters in the URL
-      - Once it gets the right question, store it in a state so that it is loaded onscreen
-    */
-
-    let subject = match.params.subject
-    let idQuestion = match.params.idQuestion
-    let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
-
-    setQuestion(question)
-
-  }, [match.params.subject, match.params.idQuestion])
+  let subject = match.params.subject
+  let idQuestion = match.params.idQuestion
+  const question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
 
   const handleLevelChange = e => {
     let lvlClicked = e.target.id
 
     // set everything to false, then set only the correct component to true
     let new_level = {
-      test: "test",
-      t: "a",
-      1: 2
+      easy: false,
+      medium: false,
+      hard: false,
     }
 
     new_level[lvlClicked] = true
@@ -112,8 +98,8 @@ const ViewQuestion = ({ match }) => {
             }
 
             {level.easy ? <TrueOrFalse question={question} /> : null}
-            {level.medium ? <Alternative /> : null}
-            {level.hard ? <Written answerFunction={question.answer} values={question.values} /> : null}
+            {level.medium ? <Alternative question={question} /> : null}
+            {level.hard ? <Written answerFunction={question.verifyAnswer} values={question.values} /> : null}
           </div>
 
           {/* Component where the actions are --> answer the question/next question */}

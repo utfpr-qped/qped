@@ -23,13 +23,21 @@ function parseQuestion(question) {
   const parser = new QuestionParser(question.text)
 
   function generateOptions(trueOrFalse) {
+    const options = [question.answer(parser.getAllValues())]
     let numberOfOptions = 4
-    const options = [parser.getAllValues()]
     if (trueOrFalse) {
       numberOfOptions = 2
     }
     for (let i = 0; i < numberOfOptions - 1; i++) {
-      options.push(parser.getAllValues(i))
+      const option = question.answer(parser.getAllValues(i))
+      //console.log(options.includes(option))
+      /*
+      if (options.includes(option)) {
+        //i--
+        continue
+      }
+      */
+      options.push(option)
     }
     return helper.shuffleArray(options)
   }
@@ -38,7 +46,8 @@ function parseQuestion(question) {
     id: question.id,
     title: question.title,
     text: parser.getText(),
-    answer: question.answer.toString(),
+    verifyAnswer: question.verifyAnswer.toString(),
+    answer: question.answer(parser.getAllValues()),
     subject: question.subject,
     level: question.level,
     tags: question.tags,

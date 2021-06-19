@@ -12,7 +12,7 @@ export const questions = {
       text: `Suponha que você está realizando uma busca sequencial no vetor:    
   \`[{vet=3:13:+{6:11}}]\`     
   Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?`,
-      answer: function (values, userInput) {
+      verifyAnswer: function (values, userInput) {
         const { vet, valor } = values
         for (let i = 0; i < vet.length; i++) {
           if (
@@ -23,11 +23,20 @@ export const questions = {
           }
         }
 
-        // if the value is not in the array, then the correct answer is the size of the array + 1
-        if (userInput === vet.length+1) return true;
+        // if the value is not in the array, then the correct verifyAnswer is the size of the array + 1
+        if (userInput === vet.length + 1) return true;
 
         // if the user input doesn't apply to any of the cases above, it is incorrect
         return false;
+      },
+      answer: function (values) {
+        const { vet, valor } = values
+        for (let i = 0; i < vet.length; i++) {
+          if (vet[i] === valor) {
+            return i + 1
+          }
+          return vet.length
+        }
       },
       subject: 'busca',
       level: 1, //1 para facil, 2 para medio, 3 para dificil
@@ -50,7 +59,7 @@ export const questions = {
           <op value="1011011000">push({a=1:5}), pop(), push({b=1:5}), push({c=1:5}), pop(), push({d=1:5}), push({e=1:5}), pop(), pop(), pop()</op>
           <op value="1010110100">push({a=1:5}), pop(), push({b=1:5}), pop(), push({c=1:5}), push({d=1:5}), pop(), push({e=1:5}), pop(), pop()</op>
         </operacoes>`,
-      answer: function ({ operacoes, a, b, c, d, e }) {
+      verifyAnswer: function ({ operacoes, a, b, c, d, e }) {
         let ops = operacoes.split('');
         let values = [e, d, c, b, a];
         let stack = [];
