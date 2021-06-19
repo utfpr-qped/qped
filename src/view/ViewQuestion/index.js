@@ -101,15 +101,17 @@ const ViewQuestion = ({ match }) => {
               </div>
             </header>
 
-            {/* Body of the resolution area, where a single type of answer is displayed 
+            {
+              /* Body of the resolution area, where a single type of answer is displayed 
+  
+                Change the input type based on the level state ('facil', 'medio', 'dificil')
+                When the state changes, another type of input is renderered on screen
+  
+                By default, it is the 'easy' state (aka TrueOrFalse input)
+              */
+            }
 
-              Change the input type based on the level state ('facil', 'medio', 'dificil')
-              When the state changes, another type of input is renderered on screen
-
-              By default, it is the 'easy' state (aka TrueOrFalse input)
-            */}
-
-            {level.easy ? <TrueOrFalse answerFunction={question.answer} /> : null}
+            {level.easy ? <TrueOrFalse question={question} /> : null}
             {level.medium ? <Alternative /> : null}
             {level.hard ? <Written answerFunction={question.answer} values={question.values} /> : null}
           </div>

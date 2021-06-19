@@ -1,5 +1,8 @@
+/* eslint-disable */
 import { QuestionParser } from "./QuestionParser"
 import { questions as rawQuestions } from "./questions"
+import helpers from "./helpers"
+const helper = helpers()
 
 const questions = {}
 
@@ -8,13 +11,30 @@ for (const topic in rawQuestions) {
     if (questions[topic] === undefined) {
       questions[topic] = []
     }
-    questions[topic].push(parseQuestion(question))
+    questions[topic].push({
+      id: question.id,
+      title: question.title,
+      subject: question.subject
+    })
   })
 }
 
 function parseQuestion(question) {
   const parser = new QuestionParser(question.text)
-  return {
+
+  function generateOptions(trueOrFalse) {
+    let numberOfOptions = 4
+    const options = [parser.getAllValues()]
+    if (trueOrFalse) {
+      numberOfOptions = 2
+    }
+    for (let i = 0; i < numberOfOptions - 1; i++) {
+      options.push(parser.getAllValues(i))
+    }
+    return helper.shuffleArray(options)
+  }
+
+  const parsedQuestion = {
     id: question.id,
     title: question.title,
     text: parser.getText(),
@@ -23,8 +43,15 @@ function parseQuestion(question) {
     level: question.level,
     tags: question.tags,
     values: parser.getAllValues(),
-    //type: question.type,
+    options: generateOptions(false),
+    trueOrFalseOptions: generateOptions(true)
   }
+  /*
+  console.log(parsedQuestion.values)
+  console.log(parsedQuestion.options)
+  console.log(parsedQuestion.trueOrFalseOptions)
+  */
+  return parsedQuestion
 }
 
 export { questions, rawQuestions, parseQuestion }
