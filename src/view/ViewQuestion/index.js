@@ -7,7 +7,7 @@ import { Default } from "../../components/QuestionActions";
 // Styles
 import "./index.css";
 // Questions DB
-import { questions as database } from "../../utils/index";
+import { rawQuestions, parseQuestion } from "../../utils/index";
 
 /**
  * ViewQuestion
@@ -35,7 +35,7 @@ const ViewQuestion = ({ match }) => {
 
     let subject = match.params.subject
     let idQuestion = match.params.idQuestion
-    let question = database[`${subject}`].find(element => element.id === idQuestion)
+    let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
 
     setQuestion(question)
 
