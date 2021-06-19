@@ -8,7 +8,11 @@ for (const topic in rawQuestions) {
     if (questions[topic] === undefined) {
       questions[topic] = []
     }
-    questions[topic].push(parseQuestion(question))
+    questions[topic].push({
+      subject: question.subject,
+      id: question.id,
+      title: question.title
+    })
   })
 }
 
