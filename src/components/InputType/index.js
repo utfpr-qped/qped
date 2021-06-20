@@ -1,6 +1,9 @@
-import { useRef } from "react";
+import "./index.css";
 
-export const TrueOrFalse = ({ question }) => {
+/**
+ * TrueOrFalse
+ */
+/*const TrueOrFalse = ({ question }) => {
   function verifyTrueOrFalseAnswer(input) {
     const answerFunction = question.verifyAnswer
     const userInput = input === true ? question.trueOrFalseOptions[0] : question.trueOrFalseOptions[1]
@@ -44,9 +47,12 @@ export const TrueOrFalse = ({ question }) => {
       </div>
     </div >
   );
-}
+}*/
 
-export const Alternative = ({ question }) => {
+/**
+ * MultipleChoice
+ */
+/*const MultipleChoice = ({ question }) => {
   function verifyAnswer(optionIndex) {
     const answerFunction = question.verifyAnswer
     const userInput = question.options[optionIndex]
@@ -55,8 +61,9 @@ export const Alternative = ({ question }) => {
     const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${userInput})`)
     alert(answer ? "Correto!" : "Errado :(")
   }
+
   return (
-    <div className="Alternative mb-3 w-50">
+    <div className="MultipleChoice mb-3 w-50">
       <label className="form-label">Selecione a alternativa correta:</label>
       <div className="options-container">
         {
@@ -71,16 +78,16 @@ export const Alternative = ({ question }) => {
       </div>
     </div>
   );
-}
+}*/
 
-export const Written = ({ answerFunction, values }) => {
-  const refTextarea = useRef(null)
-
-  function newVerifyAnswer({ answerFunction, values }) {
-    let input = refTextarea.current.value
-    // eslint-disable-next-line
-    const answer = eval(`(${answerFunction})(${JSON.stringify(values)}, ${input})`)
-    alert(answer ? "Correto!" : "Errado :(")
+/**
+ * Written
+ */
+const Written = ({ setUserInput }) => {
+  // Enviar a resposta do usuario para o 'userInput', que é um state localizado no componente pai 
+  const handleChange = e => {
+    // TODO talvez seja preciso tratar o que é enviado quando for outros tipos de respostas
+    setUserInput(e.target.value)
   }
 
   return (
@@ -93,9 +100,27 @@ export const Written = ({ answerFunction, values }) => {
             <path fillRule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
           </svg>
         </span>
-        <textarea className="form-control" placeholder="Sua resposta..." aria-label="Textarea" ref={refTextarea}></textarea>
-        <button onClick={() => newVerifyAnswer({ answerFunction, values })}>Verificar</button>
+        <textarea className="form-control" placeholder="Sua resposta..." aria-label="Textarea" onChange={handleChange}></textarea>
       </div>
     </div>
-  );
+  )
 }
+
+/**
+ * Componente padrão que decide qual tipo de componente exibir
+ * @param type:string - tipo do componente que sera exibido
+ * @param setUserInput:function - armazena a resposta do usuario
+ * @returns () - um tipo de componente (TrueOrFalse, MultipleChoice, Written)
+ */
+ const InputType = ({ type, setUserInput }) => {  
+  return (
+    <>
+      {/* TODO find a better way to display each component */}
+      {/* { type === 'easy' ? <TrueOrFalse /> : null } */}
+      {/* { type === 'medium' ? <MultipleChoice /> : null } */}
+      { type === 'hard' ? <Written setUserInput={setUserInput} /> : null }
+    </>
+  )
+}
+
+export default InputType

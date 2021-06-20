@@ -42,6 +42,26 @@ export const questions = {
       level: 1, //1 para facil, 2 para medio, 3 para dificil
       tags: ['busca binária', 'busca', 'conceito'],
     },
+    {
+      id: 'busca-2',
+      title: 'Busca sequencial [antigo, funcionando]',
+      text: `Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\` 
+     Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
+      `,
+      answer: function (values) {
+        const { vet, valor } = values
+
+        for (let i = 0; i < vet.length; i++) {
+          if (vet[i] == valor) return i+1;
+        }
+        
+        return vet.length+1;
+      },
+      verifyAnswer: function (values, userInput) {},
+      subject: 'Busca',
+      level: 1,
+      tags: ['busca sequencial', 'busca']
+    }
   ],
   pilha: [
     {
