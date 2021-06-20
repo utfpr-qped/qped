@@ -74,10 +74,12 @@ const ViewQuestion = ({ match }) => {
       i.e ela chama a funcao 'answer' daquela questao espefifica */
     const correctAnswer = eval(`(${answerFunction})(${JSON.stringify(values)})`)
 
-    console.log('correct answer: ', correctAnswer)
-    console.log('user answer: ', input)
-    
-    setIsAnswerCorrect(false)
+    // TODO temporary fix to verify if user answer is correct
+    input.toString() === correctAnswer.toString() ? (
+      setIsAnswerCorrect(true)
+    ) : (
+      setIsAnswerCorrect(false)
+    )
   }
 
   const handleRedoQuestion = () => {
