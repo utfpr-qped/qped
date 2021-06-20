@@ -8,14 +8,18 @@ export default function helpers() {
     const topics = []
     const ids = []
     const titles = []
+    const tags = []
     Object.keys(questions).forEach(topic => {
       topics.push({ name: topic, type: "topic" })
       questions[topic].forEach((question) => {
         ids.push({ name: question.id, type: "id" })
         titles.push({ name: question.title, type: "title" })
+        question.tags.forEach(tag => {
+          tags.push({ name: tag, type: "tag" })
+        })
       })
     })
-    const search = topics.concat(ids, titles)
+    const search = topics.concat(ids, titles, tags)
     search.forEach((_, index) => {
       search[index].id = index
     })
@@ -34,6 +38,9 @@ export default function helpers() {
       case "title":
         questions = getByKey("title")
         break;
+      case "tag":
+        questions = getByTag(name)
+        break;
       default:
         alert("INVALID SEARCH TYPE")
         break;
@@ -44,7 +51,24 @@ export default function helpers() {
       for (const topic in database) {
         database[topic].forEach((question, index) => {
           if (question[key] === name) {
-            questions[topic] = []
+            if (questions[topic] === undefined) {
+              questions[topic] = []
+            }
+            questions[topic].push(database[topic][index])
+          }
+        })
+      }
+      return questions
+    }
+
+    function getByTag(tag) {
+      let questions = {}
+      for (const topic in database) {
+        database[topic].forEach((question, index) => {
+          if (question.tags.includes(tag)) {
+            if (questions[topic] === undefined) {
+              questions[topic] = []
+            }
             questions[topic].push(database[topic][index])
           }
         })

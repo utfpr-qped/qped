@@ -11,7 +11,8 @@ for (const topic in rawQuestions) {
     questions[topic].push({
       subject: question.subject,
       id: question.id,
-      title: question.title
+      title: question.title,
+      tags: question.tags,
     })
   })
 }
