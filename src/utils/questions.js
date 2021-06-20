@@ -35,8 +35,8 @@ export const questions = {
           if (vet[i] === valor) {
             return i + 1
           }
-          return vet.length
         }
+        return vet.length + 1
       },
       subject: 'busca',
       level: 1, //1 para facil, 2 para medio, 3 para dificil
