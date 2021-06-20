@@ -72,6 +72,7 @@ const ViewQuestion = ({ match }) => {
     
     /* chamar a funcao que retorna a resposta correta da questao
       i.e ela chama a funcao 'answer' daquela questao espefifica */
+    // eslint-disable-next-line
     const correctAnswer = eval(`(${answerFunction})(${JSON.stringify(values)})`)
 
     // TODO temporary fix to verify if user answer is correct
