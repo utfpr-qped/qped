@@ -44,7 +44,7 @@ export const questions = {
     },
     {
       id: 'busca-2',
-      title: 'Busca sequencial [antigo, funcionando]',
+      title: 'Busca sequencial [TESTADO]',
       text: `Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\` 
      Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
       `,
@@ -98,6 +98,25 @@ export const questions = {
       level: 1,
       tags: ['pilha', 'pilha funcionamento', 'push', 'pop'],
     }
+  ],
+  fila: [
+    {
+      id: 'fila-1',
+      title: 'Questão sobre Fila [TESTADO]',
+      text: `Se os elementos **[{vet=1:10:{3:6}}]** são adicionados a uma fila e são depois removidos da fila, em qual ordem eles serão removidos?`,
+      answer: function(values) {
+        const { vet } = values
+        let inputArr = [...vet]// copiar o vetor
+        let answer = []// resposta a ser retornada
+        while (inputArr.length) {
+          answer.push(inputArr.shift())
+        }
+        return answer
+      },
+      verifyAnswer: function (values, userInput) {},
+      subject: 'Fila',
+      level: 1, 
+      tags: ['fila']
+    },
   ]
-  //,fila: []
 }

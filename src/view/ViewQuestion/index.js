@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 // Components
 import InputType from "../../components/InputType";
-import QuestionActions from "../../components/QuestionActions";
+import { Default, Answered } from "../../components/QuestionActions";
 // Styles
 import "./index.css";
 // Questions DB
@@ -66,21 +66,16 @@ const ViewQuestion = ({ match }) => {
   const handleQuestionAnswered = () => {    
     setDidUserAnswer(true)
     
-    const answerFunction = question.answer //funcao 'answer' daquela questao
-    const values = question.values //valores apresentados no enunciado da questao
-    const input = userInput //resposta do usuario
-    
-    /* chamar a funcao que retorna a resposta correta da questao
-      i.e ela chama a funcao 'answer' daquela questao espefifica */
     // eslint-disable-next-line
-    const correctAnswer = eval(`(${answerFunction})(${JSON.stringify(values)})`)
+    const correctAnswer = eval(`(${question.answer})(${JSON.stringify(question.values)})`)
 
-    // TODO temporary fix to verify if user answer is correct
-    input.toString() === correctAnswer.toString() ? (
-      setIsAnswerCorrect(true)
-    ) : (
-      setIsAnswerCorrect(false)
-    )
+    // TODO check whether the answer that the user entered is correct or not
+    
+    console.log('userInput, typeof = ', userInput, typeof(userInput))
+    console.log('correctAnswer, typeof = ', correctAnswer, typeof(correctAnswer))
+
+    // TODO move line below to a conditional statement
+    setIsAnswerCorrect(true)
   }
 
   const handleRedoQuestion = () => {
@@ -162,24 +157,31 @@ const ViewQuestion = ({ match }) => {
               </div>
             </header>
 
-            {/* Body of the resolution area, where a single type of answer is displayed 
-
-              Change the input type based on the level state ('facil', 'medio', 'dificil')
-              When the state changes, another type of input is renderered on screen
-
-              By default, it is the 'easy' state (aka TrueOrFalse input)
-            */}
-
-            <InputType type={selectedLevel} setUserInput={setUserInput} />
+            {
+              /**
+               * Render one input type based on the level ('facil', 'medio', 'dificil')
+               * When the state changes, another type of input is renderered on screen
+               * By default, it is the 'easy' state (i.e. TrueOrFalse input)
+               */
+              question && question.options && question.trueOrFalseOptions ? (
+                <InputType 
+                  type={selectedLevel} 
+                  trueOrFalseOptions={question.trueOrFalseOptions} 
+                  multipleChoiceOptions={question.options}
+                  setUserInput={setUserInput} 
+                />
+              ) : null
+            }
           </div>
 
-          {/* Component where the actions are --> answer the question/next question */}
-          <QuestionActions 
-            didUserAnswer={didUserAnswer} 
-            handleQuestionAnswered={handleQuestionAnswered} 
-            isAnswerCorrect={isAnswerCorrect} 
-            handleRedoQuestion={handleRedoQuestion}
-          />
+          {didUserAnswer ? (
+            <Answered 
+              isAnswerCorrect={isAnswerCorrect} 
+              handleRedoQuestion={handleRedoQuestion} 
+            />
+          ) : (
+            <Default handleQuestionAnswered={handleQuestionAnswered} />
+          )}
         </div>
       </div>
     </div>

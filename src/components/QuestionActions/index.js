@@ -1,6 +1,6 @@
 import "./index.css";
 
-const Default = ({handleQuestionAnswered}) => {
+export const Default = ({handleQuestionAnswered}) => {
   return (
     <div className="container-actions default">
       {/* Text and Answer */}
@@ -12,7 +12,7 @@ const Default = ({handleQuestionAnswered}) => {
   )
 }
 
-const Answered = ({ isAnswerCorrect, handleRedoQuestion }) => {
+export const Answered = ({ isAnswerCorrect, handleRedoQuestion }) => {
   return (
     <div className="container-actions solved">
       {/* <!-- Text and Answer --> */}
@@ -41,17 +41,3 @@ const Answered = ({ isAnswerCorrect, handleRedoQuestion }) => {
     </div>
   )
 }
-
-const QuestionActions = ({ didUserAnswer, handleQuestionAnswered, isAnswerCorrect, handleRedoQuestion }) => {
-  return (
-    <>
-      {didUserAnswer ? (
-        <Answered isAnswerCorrect={isAnswerCorrect} handleRedoQuestion={handleRedoQuestion} />
-      ) : (
-        <Default handleQuestionAnswered={handleQuestionAnswered} />
-      )}
-    </>
-  )
-}
-
-export default QuestionActions;
