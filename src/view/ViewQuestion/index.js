@@ -90,6 +90,32 @@ const ViewQuestion = ({ match }) => {
     setDidUserAnswer(false)
   }
 
+  const handleNextQuestion = () => {
+
+    const nextLevel = findNextlevel(selectedLevel)
+
+    // change question to next level
+    setSelectedLevel(nextLevel)
+
+    // load a new question of that same type and level
+    setShouldLoadQuestion(true)
+
+    // load default component for QuestionActions
+    setDidUserAnswer(false)
+  }
+
+  const findNextlevel = (selectedLevel) => {
+    let nextLevel = null
+    if (selectedLevel === "easy") {
+      nextLevel = "medium"
+    } else if (selectedLevel === "medium") {
+      nextLevel = "hard"
+    } else { // TODO: update with next question or message
+      nextLevel = "easy"
+    }
+    return nextLevel
+  }
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -182,6 +208,7 @@ const ViewQuestion = ({ match }) => {
             <Answered
               isAnswerCorrect={isAnswerCorrect}
               handleRedoQuestion={handleRedoQuestion}
+              handleNextQuestion={handleNextQuestion}
             />
           ) : (
             <Default handleQuestionAnswered={handleQuestionAnswered} />
