@@ -19,6 +19,7 @@ const ViewQuestion = ({ match }) => {
   const [question, setQuestion] = useState({})
 
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null)
+  const [correctAnswer, setCorrectAnswer] = useState(null)
   const [didUserAnswer, setDidUserAnswer] = useState(false)
 
   const [userInput, setUserInput] = useState('')
@@ -80,6 +81,7 @@ const ViewQuestion = ({ match }) => {
 
     // TODO move line below to a conditional statement
     setIsAnswerCorrect(isCorrect)
+    setCorrectAnswer(correctAnswer)
   }
 
   const handleRedoQuestion = () => {
@@ -207,6 +209,7 @@ const ViewQuestion = ({ match }) => {
           {didUserAnswer ? (
             <Answered
               isAnswerCorrect={isAnswerCorrect}
+              correctAnswer={correctAnswer}
               handleRedoQuestion={handleRedoQuestion}
               handleNextQuestion={handleNextQuestion}
             />

@@ -12,13 +12,13 @@ export const Default = ({ handleQuestionAnswered }) => {
   )
 }
 
-export const Answered = ({ isAnswerCorrect, handleRedoQuestion, handleNextQuestion }) => {
+export const Answered = ({ isAnswerCorrect, correctAnswer, handleRedoQuestion, handleNextQuestion }) => {
   return (
     <div className="container-actions solved">
       {/* <!-- Text and Answer --> */}
       <div className="answer">
         <p data-answer-state={isAnswerCorrect}>{isAnswerCorrect ? 'Resposta correta!' : 'Resposta incorreta.'}</p>
-        <div>0</div>
+        <div>{correctAnswer}</div>
       </div>
 
       {/* <!-- Buttons --> */}
