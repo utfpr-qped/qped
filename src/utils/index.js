@@ -5,24 +5,31 @@ const questions = {}
 
 for (const topic in rawQuestions) {
   rawQuestions[topic].forEach(question => {
-    const parser = new QuestionParser(question.text)
     if (questions[topic] === undefined) {
       questions[topic] = []
     }
     questions[topic].push({
+      subject: question.subject,
       id: question.id,
       title: question.title,
-      text: parser.getText(),
-      answer: question.answer.toString(),
-      subject: question.subject,
-      level: question.level,
       tags: question.tags,
-      values: parser.getAllValues(),
-      //type: question.type,
     })
   })
 }
 
-console.log(questions)
+function parseQuestion(question) {
+  const parser = new QuestionParser(question.text)
+  return {
+    id: question.id,
+    title: question.title,
+    text: parser.getText(),
+    answer: question.answer.toString(),
+    subject: question.subject,
+    level: question.level,
+    tags: question.tags,
+    values: parser.getAllValues(),
+    //type: question.type,
+  }
+}
 
-export { questions }
+export { questions, rawQuestions, parseQuestion }
