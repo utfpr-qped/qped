@@ -144,30 +144,30 @@ Utilizando o método de ordenação **bubble sort**, quantas trocas são necess�
       verifyAnswer: function (values, userInput) {},
       subject: 'Busca',
       level: 1,
-      tags: ['busca sequencial']
+      tags: ['busca sequencial', 'busca']
     },
-
     {
       id: 'busca-3',
-      title: 'Busca regular 2',
-      text: `
-Suponha que seja feita uma busca sequencial otimizada no vetor **[{vet=1:10:{5:10}}]** que deve ser ordenado antes da busca. 
-
-Quantas comparações serão realizadas se o valor a ser buscado for **"{valor=1:10}"**?
+      title: 'Questao de busca 3',
+      text: `Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\` 
+     Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
       `,
-      answer: function (vet, valor) {
-        // Ordenar vetor usando Bubble Sort
-        let sortedArray = BubbleSort(vet)
-
-        for (let i = 0; i < sortedArray.length; i++) {
-          if (sortedArray[i] == valor) return i + 1;
+      answer: function answer(values, userInput) {
+        const { vet, valor } = values
+        for (let i = 0; i < vet.length; i++) {
+          if (
+            vet[i] === valor &&
+            i + 1 === userInput
+          ) {
+            return true;
+          }
         }
-        return sortedArray.length;
+        return false
       },
-      subject: 'busca',
+      subject: 'Busca',
       level: 1,
-      tags: ['busca', 'busca otimizada', 'busca sequencial']
-    },
+      tags: ['busca sequencial', 'busca']
+    }
   ],
 
   // Questões de Pilha
@@ -199,8 +199,24 @@ Quantas comparações serão realizadas se o valor a ser buscado for **"{valor=1
           } else {
             resp.push(stack.pop());
           }
+          return resp;
         }
-        return resp;
+      },
+      subject: 'pilha',
+      level: 1,
+      tags: ['pilha', 'pilha funcionamento', 'push', 'pop']
+    },
+    {
+      id: 'pilha-1',
+      title: 'Questao de pilha 1',
+      text: `Considere o método de busca sequencial em um vetor contendo os elementos: ** [{ vet=2: 23: +{ 5: 10 } }] **. 
+  
+  Qual deve ser o retorno da busca quando o usuário pesquisar pelo item ** "{valor=2:23}" **? `,
+      answer: function answer(vet, valor) {
+        for (let i = 0; i < vet.length; i++) {
+          if (vet[i] === valor) return i;
+        }
+        return true;
       },
       subject: 'pilha',
       level: 1,
