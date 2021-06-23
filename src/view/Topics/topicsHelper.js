@@ -14,9 +14,10 @@ export default function helpers() {
       questions[topic].forEach((question) => {
         ids.push({ name: question.id, type: "id" })
         titles.push({ name: question.title, type: "title" })
-        question.tags.forEach(tag => {
-          tags.push({ name: tag, type: "tag" })
-        })
+        // TODO: returns undefined for questions.tags
+        // question.tags.forEach(tag => {
+        //   tags.push({ name: tag, type: "tag" })
+        // })
       })
     })
     const search = topics.concat(ids, titles, tags)
