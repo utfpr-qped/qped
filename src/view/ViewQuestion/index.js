@@ -15,10 +15,11 @@ import { rawQuestions, parseQuestion } from "../../utils/index";
  */
 const ViewQuestion = ({ match }) => {
   const [shouldLoadQuestion, setShouldLoadQuestion] = useState(true)
-  
+
   const [question, setQuestion] = useState({})
 
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null)
+  const [correctAnswer, setCorrectAnswer] = useState(null)
   const [didUserAnswer, setDidUserAnswer] = useState(false)
 
   const [userInput, setUserInput] = useState('')
@@ -38,7 +39,7 @@ const ViewQuestion = ({ match }) => {
 
     if (shouldLoadQuestion) {
       setShouldLoadQuestion(false)
-      
+
       let subject = match.params.subject
       let idQuestion = match.params.idQuestion
       let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
@@ -63,19 +64,24 @@ const ViewQuestion = ({ match }) => {
   /**
    * É ativado quando o usuario clica em "Responder"
    */
-  const handleQuestionAnswered = () => {    
+  const handleQuestionAnswered = () => {
     setDidUserAnswer(true)
-    
+
     // eslint-disable-next-line
     const correctAnswer = eval(`(${question.answer})(${JSON.stringify(question.values)})`)
 
     // TODO check whether the answer that the user entered is correct or not
-    
-    console.log('userInput, typeof = ', userInput, typeof(userInput))
-    console.log('correctAnswer, typeof = ', correctAnswer, typeof(correctAnswer))
+
+    console.log('userInput, typeof = ', userInput, typeof (userInput))
+    console.log('correctAnswer, typeof = ', correctAnswer, typeof (correctAnswer))
+
+    // eslint-disable-next-line
+    const isCorrect = userInput == correctAnswer ? true : false
+    console.log(isCorrect)
 
     // TODO move line below to a conditional statement
-    setIsAnswerCorrect(true)
+    setIsAnswerCorrect(isCorrect)
+    setCorrectAnswer(correctAnswer)
   }
 
   const handleRedoQuestion = () => {
@@ -84,6 +90,32 @@ const ViewQuestion = ({ match }) => {
 
     // load default component for QuestionActions
     setDidUserAnswer(false)
+  }
+
+  const handleNextQuestion = () => {
+
+    const nextLevel = findNextlevel(selectedLevel)
+
+    // change question to next level
+    setSelectedLevel(nextLevel)
+
+    // load a new question of that same type and level
+    setShouldLoadQuestion(true)
+
+    // load default component for QuestionActions
+    setDidUserAnswer(false)
+  }
+
+  const findNextlevel = (selectedLevel) => {
+    let nextLevel = null
+    if (selectedLevel === "easy") {
+      nextLevel = "medium"
+    } else if (selectedLevel === "medium") {
+      nextLevel = "hard"
+    } else { // TODO: update with next question or message
+      nextLevel = "easy"
+    }
+    return nextLevel
   }
 
   return (
@@ -119,38 +151,38 @@ const ViewQuestion = ({ match }) => {
               <h4>Resolva</h4>
               <div className="d-flex">
                 <div className="form-check ps-1">
-                  <input 
-                    type="radio" 
-                    value="easy" 
-                    className="btn-check" 
-                    name="levelOptions" 
-                    id="level-easy" 
-                    checked={selectedLevel === 'easy'} 
-                    onChange={e => {setSelectedLevel(e.target.value)}}
+                  <input
+                    type="radio"
+                    value="easy"
+                    className="btn-check"
+                    name="levelOptions"
+                    id="level-easy"
+                    checked={selectedLevel === 'easy'}
+                    onChange={e => { setSelectedLevel(e.target.value) }}
                   />
                   <label className="btn btn-outline-secondary" htmlFor="level-easy">Fácil</label>
                 </div>
                 <div className="form-check ps-1">
-                  <input 
-                    type="radio" 
-                    value="medium" 
-                    className="btn-check" 
-                    name="levelOptions" 
-                    id="level-medium" 
-                    checked={selectedLevel === 'medium'} 
-                    onChange={e => {setSelectedLevel(e.target.value)}} 
+                  <input
+                    type="radio"
+                    value="medium"
+                    className="btn-check"
+                    name="levelOptions"
+                    id="level-medium"
+                    checked={selectedLevel === 'medium'}
+                    onChange={e => { setSelectedLevel(e.target.value) }}
                   />
                   <label className="btn btn-outline-secondary" htmlFor="level-medium">Médio</label>
                 </div>
                 <div className="form-check ps-1">
-                  <input 
-                    type="radio" 
-                    value="hard" 
-                    className="btn-check" 
-                    name="levelOptions" 
-                    id="level-hard" 
-                    checked={selectedLevel === 'hard'} 
-                    onChange={e => {setSelectedLevel(e.target.value)}} 
+                  <input
+                    type="radio"
+                    value="hard"
+                    className="btn-check"
+                    name="levelOptions"
+                    id="level-hard"
+                    checked={selectedLevel === 'hard'}
+                    onChange={e => { setSelectedLevel(e.target.value) }}
                   />
                   <label className="btn btn-outline-secondary" htmlFor="level-hard">Difícil</label>
                 </div>
@@ -164,20 +196,22 @@ const ViewQuestion = ({ match }) => {
                * By default, it is the 'easy' state (i.e. TrueOrFalse input)
                */
               question && question.options && question.trueOrFalseOptions ? (
-                <InputType 
-                  type={selectedLevel} 
-                  trueOrFalseOptions={question.trueOrFalseOptions} 
+                <InputType
+                  type={selectedLevel}
+                  trueOrFalseOptions={question.trueOrFalseOptions}
                   multipleChoiceOptions={question.options}
-                  setUserInput={setUserInput} 
+                  setUserInput={setUserInput}
                 />
               ) : null
             }
           </div>
 
           {didUserAnswer ? (
-            <Answered 
-              isAnswerCorrect={isAnswerCorrect} 
-              handleRedoQuestion={handleRedoQuestion} 
+            <Answered
+              isAnswerCorrect={isAnswerCorrect}
+              correctAnswer={correctAnswer}
+              handleRedoQuestion={handleRedoQuestion}
+              handleNextQuestion={handleNextQuestion}
             />
           ) : (
             <Default handleQuestionAnswered={handleQuestionAnswered} />
