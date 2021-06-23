@@ -1,10 +1,92 @@
 /* eslint-disable */
 /**
- * Lists of questions organized in one single object with each topic
- * 
- * TODO This list of questions works as dummy data, it needs to be replaced with the correct questions
+ * List of questions organized in one single object with each topic
  */
+
+// ! Lista base de algoritmos de ordenação
+/**
+ * Sort an array in ascending order
+ * @param originalArray:array - Original array
+ * @returns [] - Sorted array
+ */
+function BubbleSort(originalArray) {
+  // Make a copy of the original array
+  let arr = [...originalArray]
+
+  let swapped;
+  do {
+    swapped = false;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] > arr[i + 1]) {
+        let tmp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = tmp;
+        swapped = true;
+      }
+    }
+  } while (swapped);
+  return arr;
+}
+
 export const questions = {
+  // Questões de Ordenação
+  ordenacao: [
+    {
+      id: 'ordenacao-1',
+      title: 'Ordenação 1',
+      text: `
+Utilizando o método de ordenação **bubble sort**, quantas trocas são necessárias para que a sequência **[{vet=4:84:{5:7}}]** seja ordenada do modo **{asc=1:2}**?
+
+1 = Crescente | 2 = Descrecente
+      `,
+      answer: function (metodo, vet, asc) {
+        let swapCounter = 0
+
+        // Bubble Sort customizado para contar as trocas realizadas
+        let arr = [...vet]
+
+        let swapped;
+
+        // Ascendente
+        if (asc === 1) {
+          do {
+            swapped = false;
+            for (let i = 0; i < arr.length; i++) {
+              if (arr[i] > arr[i + 1]) {
+                swapCounter++;// incrementar a qtd de trocas feitas
+
+                let tmp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = tmp;
+                swapped = true;
+              }
+            }
+          } while (swapped);
+        } else {
+          do {
+            swapped = false;
+            for (let i = 0; i < arr.length; i++) {
+              if (arr[i] < arr[i + 1]) {
+                swapCounter++;// incrementar a qtd de trocas feitas
+
+                let tmp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = tmp;
+                swapped = true;
+              }
+            }
+          } while (swapped);
+        }
+
+        return swapCounter
+      },
+      subject: 'ordenacao',
+      level: 1,
+      tags: ['tags']
+    },
+  ],
+
+  // Questões de Busca
   busca: [
     {
       id: 'busca-1',
@@ -42,6 +124,8 @@ export const questions = {
       level: 1, //1 para facil, 2 para medio, 3 para dificil
       tags: ['busca binária', 'busca', 'conceito'],
     },
+
+    // Retorna o index do primeiro valor encontrado e retorna -1 se não for encontrado. 
     {
       id: 'busca-2',
       title: 'Busca sequencial [TESTADO]',
@@ -60,9 +144,33 @@ export const questions = {
       verifyAnswer: function (values, userInput) {},
       subject: 'Busca',
       level: 1,
-      tags: ['busca sequencial', 'busca']
-    }
+      tags: ['busca sequencial']
+    },
+
+    {
+      id: 'busca-3',
+      title: 'Busca regular 2',
+      text: `
+Suponha que seja feita uma busca sequencial otimizada no vetor **[{vet=1:10:{5:10}}]** que deve ser ordenado antes da busca. 
+
+Quantas comparações serão realizadas se o valor a ser buscado for **"{valor=1:10}"**?
+      `,
+      answer: function (vet, valor) {
+        // Ordenar vetor usando Bubble Sort
+        let sortedArray = BubbleSort(vet)
+
+        for (let i = 0; i < sortedArray.length; i++) {
+          if (sortedArray[i] == valor) return i + 1;
+        }
+        return sortedArray.length;
+      },
+      subject: 'busca',
+      level: 1,
+      tags: ['busca', 'busca otimizada', 'busca sequencial']
+    },
   ],
+
+  // Questões de Pilha
   pilha: [
     {
       id: 'pilha-1',

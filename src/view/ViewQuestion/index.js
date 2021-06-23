@@ -139,8 +139,12 @@ const ViewQuestion = ({ match }) => {
           </div>
 
           <div className="tags mb-6">
-            {/* TODO add key for each mapped element */}
-            {/* { question.tags.map(tag => <div className="badge-tags me-1">{tag}</div>) } */}
+            {/* Iterate the tags array for that question and display it onscreen  */}
+            {question.tags && (
+              Object.keys(question.tags).map((tagObj, index) => {
+                return <div className="badge-tags me-1" key={index}>{question.tags[index]}</div>
+              })
+            )}
           </div>
         </div>
 
