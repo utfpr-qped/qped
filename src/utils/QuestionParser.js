@@ -464,9 +464,11 @@ export class QuestionParser {
     let text = this.text;
     let values = [["\\{", "{"], ["\\}", "}"]];
 
-    (this.tokens.sort((a, b) => b.length - a.length)).reverse().forEach(token => {
-      values.push([token, this.getValue(this.getTokenId(token), this.seed)]);
-    });
+    (this.tokens.sort((a, b) => b.length - a.length))
+      .reverse()
+      .forEach(token => {
+        values.push([token, this.getValue(this.getTokenId(token), this.seed)]);
+      });
 
     while (values.length > 0) {
       let val = values.pop();

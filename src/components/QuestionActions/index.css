@@ -26,9 +26,12 @@
 
 .Resolution .container-actions.solved .answer p {
   font-weight: 600;
-  color: var(--correct);
+  color: initial;
   margin-bottom: 8px;
 }
+
+.Resolution .container-actions.solved .answer p[data-answer-state="true"] { color: var(--correct); }
+.Resolution .container-actions.solved .answer p[data-answer-state="false"] { color: var(--incorrect); }
 
 /* Box for where the correct answer is outputted */
 .Resolution .container-actions.solved .answer > div {
