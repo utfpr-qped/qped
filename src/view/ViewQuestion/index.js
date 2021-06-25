@@ -49,38 +49,17 @@ const ViewQuestion = ({ match }) => {
 
   }, [match.params.subject, match.params.idQuestion, shouldLoadQuestion])
 
-  /**
-   * * independentemente de qual InputType é carregado (trueorfalse, written, etc)
-   * eu preciso recuperar um unico tipo de valor que o usuario inseriu
-   *  - se foi TrueOrFalse, gerar duas respostas (uma true e outra false) usando o question.getAllValues(seeds), 
-   *    mas sortear apenas 1 delas para exibir ao usuario, para q ele possa decidir se esta correta ou nao
-   *  - se for MultpleChoise, fazer a mesma coisa que TrueOrfalse, mas gerando 5 alternativas, 1 sendo sempre correta
-   *  - se foi Written, pegar o valor do input/textarea
-   * 
-   * * uma vez que o userInput for recuperado e armazenado em um state
-   * é possivel usar o userInput, e.g. passar na hora de verificar se a resposta esta correta ou nao
-   */
-
-  /**
-   * É ativado quando o usuario clica em "Responder"
-   */
+  // Activates when user tries to answer the question
   const handleQuestionAnswered = () => {
     setDidUserAnswer(true)
 
+    // get the correct answer for that question
     // eslint-disable-next-line
     const correctAnswer = eval(`(${question.answer})(${JSON.stringify(question.values)})`)
 
-    // TODO check whether the answer that the user entered is correct or not
+    // check whether the answer that the user entered is correct or not
+    userInput.toString() === correctAnswer.toString() ? setIsAnswerCorrect(true) : setIsAnswerCorrect(false)
 
-    console.log('userInput, typeof = ', userInput, typeof (userInput))
-    console.log('correctAnswer, typeof = ', correctAnswer, typeof (correctAnswer))
-
-    // eslint-disable-next-line
-    const isCorrect = userInput == correctAnswer ? true : false
-    console.log(isCorrect)
-
-    // TODO move line below to a conditional statement
-    setIsAnswerCorrect(isCorrect)
     setCorrectAnswer(correctAnswer)
   }
 

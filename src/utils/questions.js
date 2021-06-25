@@ -40,14 +40,18 @@ export const questions = {
       `,
       answer: function (values) {
         const { vet, valor } = values
+        let answer = []// resposta a ser retornada
 
         for (let i = 0; i < vet.length; i++) {
-          if (vet[i] == valor) return i+1;
+          if (vet[i] == valor) {
+            answer.push(i+1)
+            return answer
+          }
         }
         
-        return vet.length+1;
+        answer.push(vet.length+1)
+        return answer
       },
-      verifyAnswer: function (values, userInput) {},
       subject: 'Busca',
       level: 1,
       tags: ['busca sequencial', 'busca']
@@ -68,7 +72,6 @@ export const questions = {
         }
         return answer
       },
-      verifyAnswer: function (values, userInput) {},
       subject: 'Fila',
       level: 1, 
       tags: ['ordem de remoção', 'fila']
