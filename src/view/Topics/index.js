@@ -30,15 +30,16 @@ const Topics = () => {
 
   return (
     <div className="Topics container w-50">
-      <ReactSearchAutocomplete
-        items={searchOptions}
-        onSelect={onSelect}
-        onClear={onClear}
-        onSearch={onSearch}
-        autoFocus
-      />
       <header className="mt-5 mb-4">
-        <h1>Tópicos</h1>
+        <h1 className="mb-4">Tópicos</h1>
+
+        <ReactSearchAutocomplete
+          items={searchOptions}
+          onSelect={onSelect}
+          onClear={onClear}
+          onSearch={onSearch}
+          placeholder='Buscar questões'
+        />
       </header>
       {
         Object.keys(questions).map((topic, index) => {
