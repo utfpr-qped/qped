@@ -53,17 +53,16 @@ function parseQuestion(question) {
     // o loop precisa ser iterado mais uma vez e isso precisa ser feito por um loop nested
     // mais info sobre labels: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label
     generate:
-    for (let i = 0; i < numberOfOptions - 1; i++) {
+    for (let i = 0; i < numberOfOptions - 1;) {
       const randomInt = generateSeed(seeds)
       const option = question.answer(parser.getAllValues(randomInt))
       for (let j = 0; j < options.length; j++) {
-        if (helper.compareArrays(options[i], option)) {
-          console.log("already exists ", option)
-          i--
+        if (helper.compareArrays(options[j], option)) {
           continue generate
         }
       }
       options.push(option)
+      i++
     }
     return helper.shuffleArray(options)
   }
