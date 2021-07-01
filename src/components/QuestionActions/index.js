@@ -17,7 +17,7 @@ export const Answered = ({ isAnswerCorrect, correctAnswer, handleRedoQuestion, h
     <div className="container-actions solved">
       {/* <!-- Text and Answer --> */}
       <div className="answer">
-        <p data-answer-state={isAnswerCorrect}>{isAnswerCorrect ? 'Resposta correta!' : 'Resposta incorreta.'}</p>
+        <p data-answer-state={isAnswerCorrect}>{isAnswerCorrect ? 'Resposta correta!' : 'Resposta incorreta, confira o resultado certo abaixo.'}</p>
         <div>{correctAnswer.toString()}</div>
       </div>
 
