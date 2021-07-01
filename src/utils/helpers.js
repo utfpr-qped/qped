@@ -1,7 +1,9 @@
 
 export default function helpers() {
   return Object.freeze({
-    shuffleArray
+    shuffleArray,
+    randomInt,
+    compareArrays,
   })
   //https://bost.ocks.org/mike/shuffle/
   function shuffleArray(array) {
@@ -15,5 +17,32 @@ export default function helpers() {
       }
     }
     return copy;
+  }
+
+  function randomInt(min, max) {
+    let a = Math.ceil(min);
+    let b = Math.floor(max);
+    return Math.floor(Math.random() * (b - a + 1)) + a;
+  }
+
+  function compareArrays(first, second) {
+    if (!first || !second)
+      return false;
+
+    // eslint-disable-next-line 
+    if (first.length != second.length) {
+      return false;
+    }
+    for (var i = 0, l = first.length; i < l; i++) {
+      if (first[i] instanceof Array && second[i] instanceof Array) {
+        if (!compareArrays(first[i], second[i]))
+          return false;
+      }
+      // eslint-disable-next-line 
+      else if (first[i] != second[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 }
