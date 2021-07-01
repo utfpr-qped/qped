@@ -25,7 +25,7 @@ function parseQuestion(question) {
 
   function generateOptions(trueOrFalse) {
     const options = [question.answer(parser.getAllValues())]
-    let numberOfOptions = 4
+    let numberOfOptions = 5
     if (trueOrFalse) {
       numberOfOptions = 2
     }
