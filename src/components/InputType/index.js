@@ -20,7 +20,7 @@ const TrueOrFalse = ({ options, setUserInput }) => {
   const [selectedOption, setSelectedOption] = useState(null)
 
   return (
-    <div className="TrueOrFalse mb-3 w-50" >
+    <div className="TrueOrFalse mb-3 w-75" >
       <label className="form-label">Verifique o resultado abaixo e responda:</label>
       <textarea className="form-control mb-3" defaultValue={options[0]} style={{ height: 100 + 'px' }} readOnly></textarea>
       

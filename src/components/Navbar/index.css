@@ -1,0 +1,31 @@
+.sidenav {
+  height: 100%;
+  width: 275px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #222;
+  color: #fdfdfd;
+  overflow-x: hidden;
+  padding: 36px 20px;
+}
+
+nav .brand {
+  margin-bottom: 32px;
+}
+
+nav .brand span {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+nav div.nav-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+nav div.nav-menu a {
+  font-weight: 600;
+  margin-bottom: 14px;
+}

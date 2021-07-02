@@ -1,5 +1,5 @@
 .options-container label {
   text-align: left;
-  min-width: 150px;
-  /* border-color: var(--lightBorder); */
+  min-width: 200px;
+  border-color: #c5c5c5;
 }

@@ -26,6 +26,7 @@ const ViewQuestion = ({ match }) => {
 
   // Level of the answer
   const [selectedLevel, setSelectedLevel] = useState('easy')
+  const [showLevel, setShowLevel] = useState(false)
 
   useEffect(() => {
     /* 
@@ -98,14 +99,14 @@ const ViewQuestion = ({ match }) => {
   }
 
   return (
-    <div className="container-fluid">
+    <div className="ViewQuestion container">
       <div className="row">
         {/* AREA: Instruction */}
-        <div className="Instruction col-md-5">
+        <div className="Instruction col-lg-6">
           <div className="body">
             {/* Link that goes back to the topic list */}
             <div className="mb-3">
-              <Link to="/topics" className="h6 subject">{`← ${question.subject}`}</Link>
+              <Link to="/topics" className="fw-bolder subject">{`← ${question.subject}`}</Link>
             </div>
 
             {/* Title of the question */}
@@ -128,46 +129,65 @@ const ViewQuestion = ({ match }) => {
         </div>
 
         {/* AREA: Resolution */}
-        <div className="Resolution col-md-7">
+        <div className="Resolution col-lg-6">
           <div>
             <header>
-              <h4>Resolva</h4>
+              <h4 className="mb-0">Resolva</h4>
               <div className="d-flex">
-                <div className="form-check ps-1">
-                  <input
-                    type="radio"
-                    value="easy"
-                    className="btn-check"
-                    name="levelOptions"
-                    id="level-easy"
-                    checked={selectedLevel === 'easy'}
-                    onChange={e => { setSelectedLevel(e.target.value) }}
-                  />
-                  <label className="btn btn-outline-secondary" htmlFor="level-easy">Fácil</label>
-                </div>
-                <div className="form-check ps-1">
-                  <input
-                    type="radio"
-                    value="medium"
-                    className="btn-check"
-                    name="levelOptions"
-                    id="level-medium"
-                    checked={selectedLevel === 'medium'}
-                    onChange={e => { setSelectedLevel(e.target.value) }}
-                  />
-                  <label className="btn btn-outline-secondary" htmlFor="level-medium">Médio</label>
-                </div>
-                <div className="form-check ps-1">
-                  <input
-                    type="radio"
-                    value="hard"
-                    className="btn-check"
-                    name="levelOptions"
-                    id="level-hard"
-                    checked={selectedLevel === 'hard'}
-                    onChange={e => { setSelectedLevel(e.target.value) }}
-                  />
-                  <label className="btn btn-outline-secondary" htmlFor="level-hard">Difícil</label>
+                {
+                  showLevel && (
+                    <div className="d-flex">
+                      <div className="form-check ps-1 mb-0">
+                        <input
+                          type="radio"
+                          value="easy"
+                          className="btn-check"
+                          name="levelOptions"
+                          id="level-easy"
+                          checked={selectedLevel === 'easy'}
+                          onChange={e => { setSelectedLevel(e.target.value); setShowLevel(!showLevel) }}
+                        />
+                        <label className="btn btn-outline-secondary" htmlFor="level-easy">Fácil</label>
+                      </div>
+                      <div className="form-check ps-1 mb-0">
+                        <input
+                          type="radio"
+                          value="medium"
+                          className="btn-check"
+                          name="levelOptions"
+                          id="level-medium"
+                          checked={selectedLevel === 'medium'}
+                          onChange={e => { setSelectedLevel(e.target.value); setShowLevel(!showLevel) }}
+                        />
+                        <label className="btn btn-outline-secondary" htmlFor="level-medium">Médio</label>
+                      </div>
+                      <div className="form-check ps-1 mb-0">
+                        <input
+                          type="radio"
+                          value="hard"
+                          className="btn-check"
+                          name="levelOptions"
+                          id="level-hard"
+                          checked={selectedLevel === 'hard'}
+                          onChange={e => { setSelectedLevel(e.target.value); setShowLevel(!showLevel) }}
+                        />
+                        <label className="btn btn-outline-secondary" htmlFor="level-hard">Difícil</label>
+                      </div>
+                    </div>
+                  )
+                }
+                
+                <div className="ps-1">
+                  <div className="btn btn-secondary" onClick={() => {setShowLevel(!showLevel)}}>
+                    <span className="text-warning pe-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-lightning-charge-fill" viewBox="0 0 16 16">
+                        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
+                      </svg>
+                    </span>
+                    {selectedLevel === 'easy' && 'Fácil'}
+                    {selectedLevel === 'medium' && 'Médio'}
+                    {selectedLevel === 'hard' && 'Difícil'}
+                  </div>
                 </div>
               </div>
             </header>
