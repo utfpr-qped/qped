@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import './index.css';
 
 const Navbar = () => {
@@ -9,10 +10,10 @@ const Navbar = () => {
       </div>
 
       <div className="nav-menu">
-        <a href="#" className="text-light">Início</a>
-        <a href="#" className="text-light">Questões</a>
-        <a href="#" className="text-light">Sobre</a>
-        <a href="#" className="text-light">Ajuda</a>
+        <Link to="/" className="text-light">Início</Link>
+        <Link to="/topics" className="text-light">Tópicos</Link>
+        <Link to="/about" className="text-light">Sobre</Link>
+        <Link to="/help" className="text-light">Ajuda</Link>
       </div>
     </nav>
   );

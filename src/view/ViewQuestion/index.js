@@ -99,7 +99,7 @@ const ViewQuestion = ({ match }) => {
   }
 
   return (
-    <div className="ViewQuestion container">
+    <div className="ViewQuestion container-fluid">
       <div className="row">
         {/* AREA: Instruction */}
         <div className="Instruction col-lg-6">
