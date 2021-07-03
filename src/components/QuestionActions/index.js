@@ -28,7 +28,7 @@ export const Answered = ({ isAnswerCorrect, correctAnswer, handleRedoQuestion, h
         <p data-answer-state={isAnswerCorrect}>
           {isAnswerCorrect ? '✅ Resposta correta!' : '❌ A resposta correta é:'}
         </p>
-        <div>{correctAnswer.toString()}</div>
+        <div>{correctAnswer.join(', ')}</div>
       </div>
 
       {/* <!-- Buttons --> */}

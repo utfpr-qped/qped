@@ -12,7 +12,7 @@ const TrueOrFalse = ({ options, setUserInput }) => {
   return (
     <div className="TrueOrFalse mb-3 w-75" >
       <label className="form-label">Verifique o resultado abaixo e responda:</label>
-      <textarea className="form-control mb-3" defaultValue={options[0]} style={{ height: 100 + 'px' }} readOnly></textarea>
+      <textarea className="form-control mb-3" value={options[0].join(', ')} style={{ height: 100 + 'px' }} readOnly></textarea>
       
       <div className="options-container">
         {/* Option: True */}
@@ -85,7 +85,7 @@ const MultipleChoice = ({ options, setUserInput }) => {
                   setUserInput(option)
                 }}
               />
-              <label className="btn btn-outline-dark" htmlFor={id}>{option.toString()}</label>
+              <label className="btn btn-outline-dark" htmlFor={id}>{option.join(', ')}</label>
             </div>
           )
         })}
