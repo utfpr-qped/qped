@@ -1,13 +1,19 @@
 import "./index.css";
 
-export const Default = ({ handleQuestionAnswered }) => {
+export const Default = ({ handleQuestionAnswered, isAnswerable }) => {
   return (
     <div className="container-actions default">
       {/* Text and Answer */}
       {/* <...> */}
 
       {/* Buttons */}
-      <button className="btn btn-primary" onClick={() => { handleQuestionAnswered() }}>Responder</button>
+      <button 
+        className="btn btn-primary" 
+        onClick={() => { handleQuestionAnswered() }}
+        disabled={!isAnswerable}
+      >
+        Responder
+      </button>
     </div>
   )
 }

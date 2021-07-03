@@ -43,6 +43,8 @@ const ViewQuestion = ({ match }) => {
     if (shouldLoadQuestion) {
       setShouldLoadQuestion(false)
 
+      setUserInput('')// clear user input
+
       let subject = match.params.subject
       let idQuestion = match.params.idQuestion
       let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
@@ -235,7 +237,10 @@ const ViewQuestion = ({ match }) => {
               handleNextQuestion={handleNextQuestion}
             />
           ) : (
-            <Default handleQuestionAnswered={handleQuestionAnswered} />
+            <Default 
+              handleQuestionAnswered={handleQuestionAnswered} 
+              isAnswerable={userInput ? true : false} 
+            />
           )}
         </div>
       </div>
