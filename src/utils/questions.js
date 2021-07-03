@@ -15,10 +15,12 @@ export const questions = {
   busca: [
     {
       id: 'busca-1',
-      title: 'Busca sequencial 1',
-      text: `Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\`.
-Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
-      `,
+      title: 'Busca sequencial #1',
+      text: `
+Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\`
+
+Quantas comparações serão realizadas se o valor buscado for **{valor=3:13}**?
+      }`,
       answer: function (values) {
         const { vet, valor } = values
         let answer = []// resposta a ser retornada
@@ -39,10 +41,10 @@ Quantas comparações serão realizadas se o valor buscado for \`{valor=3:13}\`?
     },
     {
       id: 'busca-2',
-      title: 'Busca sequencial 2',
-      text: `Considere o método de busca sequencial em um vetor contendo os elementos: **\`[{vet=2:23:+{5:10}}]\`**. 
+      title: 'Busca sequencial #2',
+      text: `Considere o método de busca sequencial em um vetor contendo os elementos: \`[{vet=2:23:+{5:10}}]\` 
       
-Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **\`{valor=2:23}\`**?
+Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **{valor=2:23}**?
       `,
       // Retorna o index do primeiro valor encontrado e retorna -1 se não for encontrado. 
       answer: function (values) {
@@ -67,8 +69,10 @@ Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **\`{valo
       id: 'busca-3',
       title: 'Busca sequencial otimizada',
       text: `
-Suponha que seja feita uma busca sequencial otimizada no vetor \`[{vet=1:10:{5:10}}]\` que deve ser ordenado antes da busca. 
-
+Suponha que seja feita uma busca sequencial otimizada no vetor a seguir, o qual deve ser ordenado antes da busca. 
+\`\`\`
+[{vet=1:10:{5:10}}]
+\`\`\` 
 Quantas comparações serão realizadas se o valor a ser buscado for **{valor=1:10}**?
     `,
       answer: function (values) {
@@ -117,21 +121,23 @@ Quantas comparações serão realizadas se o valor a ser buscado for **{valor=1:
   pilha: [
     {
       id: 'pilha-1',
-      title: 'Simulaçao com Pilhas #1',
+      title: 'Simulaçao com Pilhas',
       text: `
-Considerando a função a seguir que recebe um número como argumento e utiliza a pilha S para processá-lo, o que será impresso quando \`fun({n=5:10})\` for chamado?
+Considerando a função a seguir que recebe um número como argumento e utiliza a pilha S para processá-lo.
+
+O que será impresso quando **fun({n=5:10})** for chamado?
 \`\`\`
 void fun(int n) {
   stack S; 
   while (n > 1) {
     push(&S, n%2);
     n = n/2;
-  }
+  \\}
   while (!isEmpty(&S))
     printf("%d ", pop(&S));
-}
+\\}
 \`\`\`
-      `,
+`,
       answer: function (values) {
         let { n } = values
         let stack = []
@@ -151,7 +157,7 @@ void fun(int n) {
       },
       subject: 'Pilha',
       level: 1,
-      tags: ['pilha']
+      tags: ['pilha', 'simulação']
     }
   ],
   // ! Subject: Queue
@@ -159,7 +165,7 @@ void fun(int n) {
     {
       id: 'fila-1',
       title: 'Ordem de remoção em uma fila',
-      text: `Se os elementos **[{vet=1:10:{3:6}}]** são adicionados a uma fila e são depois removidos da fila, em qual ordem eles serão removidos?`,
+      text: `Se os elementos abaixo são adicionados a uma fila e são depois removidos da fila, em qual ordem eles serão removidos? \`[{vet=1:10:{3:6}}]\``,
       answer: function (values) {
         const { vet } = values
         let inputArr = [...vet]// copiar o vetor

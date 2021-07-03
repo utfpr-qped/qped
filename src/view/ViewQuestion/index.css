@@ -1,13 +1,20 @@
+.ViewQuestion {
+  height: 100%;
+}
+
+.ViewQuestion > .row {
+  height: 100%;
+}
+
 /* ! AREA INSTRUCTION */
 .Instruction {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  padding: 16px 24px;
+  padding: 24px 32px;
   padding-top: 24px;
-  background-color: var(--light);
-  border-right: 1px solid var(--lightBorder);
+  background-color: rgb(250, 250, 250);
 }
 
 .Instruction .badge-tags {
@@ -20,10 +27,14 @@
   border-radius: 4px;
 }
 
-/* Link que volta para a tela de Topicos */
-.Instruction a.subject:hover { 
-  color: var(--bs-primary);
-  border-bottom: 2px solid var(--bs-primary); 
+/* Code block */
+pre {
+  border-radius: 4px;
+}
+
+/* React Markdown creates another pre tag inside the existing pre tag */
+pre > pre {
+  padding-bottom: 0px !important;
 }
 
 /* ! AREA RESOLUTION */
@@ -33,8 +44,8 @@
   flex-direction: column;
   justify-content: space-between;
  
-  padding: 16px 24px;
-  background-color: white;
+  padding: 24px 32px;
+  border: var(--mainBorder);
 }
 
 .Resolution header {
@@ -42,9 +53,8 @@
   justify-content: space-between;
   align-items: center;
 
-  padding-top: 8px;
   padding-bottom: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 
-  border-bottom: 1px solid var(--lightBorder);
+  border-bottom: var(--mainBorder);
 }

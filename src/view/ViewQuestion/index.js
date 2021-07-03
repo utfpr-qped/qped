@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 // Components
 import InputType from "../../components/InputType";
 import { Default, Answered } from "../../components/QuestionActions";
@@ -8,6 +10,8 @@ import { Default, Answered } from "../../components/QuestionActions";
 import "./index.css";
 // Questions DB
 import { rawQuestions, parseQuestion } from "../../utils/index";
+// Assets
+import { LightningChargeFill } from "../../assets/Icons";
 
 /**
  * ViewQuestion
@@ -26,6 +30,7 @@ const ViewQuestion = ({ match }) => {
 
   // Level of the answer
   const [selectedLevel, setSelectedLevel] = useState('easy')
+  const [showLevel, setShowLevel] = useState(false)
 
   useEffect(() => {
     /* 
@@ -39,6 +44,8 @@ const ViewQuestion = ({ match }) => {
 
     if (shouldLoadQuestion) {
       setShouldLoadQuestion(false)
+
+      setUserInput('')// clear user input
 
       let subject = match.params.subject
       let idQuestion = match.params.idQuestion
@@ -98,14 +105,14 @@ const ViewQuestion = ({ match }) => {
   }
 
   return (
-    <div className="container-fluid">
+    <div className="ViewQuestion container-fluid">
       <div className="row">
         {/* AREA: Instruction */}
-        <div className="Instruction col-md-5">
+        <div className="Instruction col-lg-6">
           <div className="body">
             {/* Link that goes back to the topic list */}
             <div className="mb-3">
-              <Link to="/topics" className="h6 subject">{`← ${question.subject}`}</Link>
+              <Link to="/topics" className="fw-bolder subject">{`← ${question.subject}`}</Link>
             </div>
 
             {/* Title of the question */}
@@ -114,7 +121,23 @@ const ViewQuestion = ({ match }) => {
             </div>
 
             {/* Question text in markdown */}
-            <ReactMarkdown children={question.text} />
+            <ReactMarkdown
+              components={{
+                code({ className, children }) {
+                  // Removing "language-" because React-Markdown already added "language-"
+                  // const language = className.replace("language-", "");
+                  return (
+                    <SyntaxHighlighter
+                      style={materialDark}
+                      language={'c'}
+                      children={children[0]}
+                    />
+                  );
+                },
+              }}
+            >
+              {question.text}
+            </ReactMarkdown>
           </div>
 
           <div className="tags mb-6">
@@ -128,46 +151,62 @@ const ViewQuestion = ({ match }) => {
         </div>
 
         {/* AREA: Resolution */}
-        <div className="Resolution col-md-7">
+        <div className="Resolution col-lg-6">
           <div>
             <header>
-              <h4>Resolva</h4>
+              <h4 className="mb-0">Resolva</h4>
               <div className="d-flex">
-                <div className="form-check ps-1">
-                  <input
-                    type="radio"
-                    value="easy"
-                    className="btn-check"
-                    name="levelOptions"
-                    id="level-easy"
-                    checked={selectedLevel === 'easy'}
-                    onChange={e => { setSelectedLevel(e.target.value) }}
-                  />
-                  <label className="btn btn-outline-secondary" htmlFor="level-easy">Fácil</label>
-                </div>
-                <div className="form-check ps-1">
-                  <input
-                    type="radio"
-                    value="medium"
-                    className="btn-check"
-                    name="levelOptions"
-                    id="level-medium"
-                    checked={selectedLevel === 'medium'}
-                    onChange={e => { setSelectedLevel(e.target.value) }}
-                  />
-                  <label className="btn btn-outline-secondary" htmlFor="level-medium">Médio</label>
-                </div>
-                <div className="form-check ps-1">
-                  <input
-                    type="radio"
-                    value="hard"
-                    className="btn-check"
-                    name="levelOptions"
-                    id="level-hard"
-                    checked={selectedLevel === 'hard'}
-                    onChange={e => { setSelectedLevel(e.target.value) }}
-                  />
-                  <label className="btn btn-outline-secondary" htmlFor="level-hard">Difícil</label>
+                {
+                  showLevel && (
+                    <div className="d-flex">
+                      <div className="form-check ps-1 mb-0">
+                        <input
+                          type="radio"
+                          value="easy"
+                          className="btn-check"
+                          name="levelOptions"
+                          id="level-easy"
+                          checked={selectedLevel === 'easy'}
+                          onChange={e => { setSelectedLevel(e.target.value); setShowLevel(!showLevel) }}
+                        />
+                        <label className="btn btn-outline-secondary" htmlFor="level-easy">Fácil</label>
+                      </div>
+                      <div className="form-check ps-1 mb-0">
+                        <input
+                          type="radio"
+                          value="medium"
+                          className="btn-check"
+                          name="levelOptions"
+                          id="level-medium"
+                          checked={selectedLevel === 'medium'}
+                          onChange={e => { setSelectedLevel(e.target.value); setShowLevel(!showLevel) }}
+                        />
+                        <label className="btn btn-outline-secondary" htmlFor="level-medium">Médio</label>
+                      </div>
+                      <div className="form-check ps-1 mb-0">
+                        <input
+                          type="radio"
+                          value="hard"
+                          className="btn-check"
+                          name="levelOptions"
+                          id="level-hard"
+                          checked={selectedLevel === 'hard'}
+                          onChange={e => { setSelectedLevel(e.target.value); setShowLevel(!showLevel) }}
+                        />
+                        <label className="btn btn-outline-secondary" htmlFor="level-hard">Difícil</label>
+                      </div>
+                    </div>
+                  )
+                }
+
+                <div className="ps-1">
+                  <div className="btn btn-secondary" onClick={() => { setShowLevel(!showLevel) }}>
+                    <span className="text-warning pe-1"><LightningChargeFill /></span>
+
+                    {selectedLevel === 'easy' && 'Fácil'}
+                    {selectedLevel === 'medium' && 'Médio'}
+                    {selectedLevel === 'hard' && 'Difícil'}
+                  </div>
                 </div>
               </div>
             </header>
@@ -197,7 +236,10 @@ const ViewQuestion = ({ match }) => {
               handleNextQuestion={handleNextQuestion}
             />
           ) : (
-            <Default handleQuestionAnswered={handleQuestionAnswered} />
+            <Default 
+              handleQuestionAnswered={handleQuestionAnswered} 
+              isAnswerable={userInput ? true : false} 
+            />
           )}
         </div>
       </div>

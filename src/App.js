@@ -10,14 +10,14 @@ import './index.css';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Navbar />
+      <Navbar />
 
+      <main>
         <Switch>
-          <Route path="/topics" component={Topics} />
-          <Route path="/question/:subject/:idQuestion" component={ViewQuestion} />
+          <Route exact path="/topics" component={Topics} />
+          <Route path="/topics/:subject/:idQuestion" component={ViewQuestion} />
         </Switch>
-      </div>
+      </main>
     </BrowserRouter>
   );
 }

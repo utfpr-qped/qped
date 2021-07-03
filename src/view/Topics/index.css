@@ -1,13 +1,9 @@
-.Topics {
-  background-color: #F7F8FA;
-}
-
 /* Container onde as questoes de um unico topico ficam 
   Pode existir varias secoes como essa na pagina de Topicos
 */
 .Topics section.topic {
-  border-radius: 4px;
-  border: 1px solid #DEE2E6;
+  border-radius: 8px;
+  border: var(--mainBorder);
   background-color: white;
 }
 
