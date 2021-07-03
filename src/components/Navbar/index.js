@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="sidenav">
       <div className="brand">
         <div className="h3">QPED</div>
-        <span>Questões para Estrutura de Dados</span>
+        <span>Questões para <br/>Estrutura de Dados</span>
       </div>
 
       <div className="nav-menu">

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 // Components
 import InputType from "../../components/InputType";
 import { Default, Answered } from "../../components/QuestionActions";
@@ -115,7 +117,23 @@ const ViewQuestion = ({ match }) => {
             </div>
 
             {/* Question text in markdown */}
-            <ReactMarkdown children={question.text} />
+            <ReactMarkdown
+              components={{
+                code({ className, children }) {
+                  // Removing "language-" because React-Markdown already added "language-"
+                  // const language = className.replace("language-", "");
+                  return (
+                    <SyntaxHighlighter
+                      style={materialDark}
+                      language={'c'}
+                      children={children[0]}
+                    />
+                  );
+                },
+              }}
+            >
+              {question.text}
+            </ReactMarkdown>
           </div>
 
           <div className="tags mb-6">
@@ -176,9 +194,9 @@ const ViewQuestion = ({ match }) => {
                     </div>
                   )
                 }
-                
+
                 <div className="ps-1">
-                  <div className="btn btn-secondary" onClick={() => {setShowLevel(!showLevel)}}>
+                  <div className="btn btn-secondary" onClick={() => { setShowLevel(!showLevel) }}>
                     <span className="text-warning pe-1">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-lightning-charge-fill" viewBox="0 0 16 16">
                         <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />

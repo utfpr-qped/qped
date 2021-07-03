@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  padding: 24px;
+  padding: 24px 32px;
   padding-top: 24px;
   background-color: rgb(250, 250, 250);
 }
@@ -27,6 +27,16 @@
   border-radius: 4px;
 }
 
+/* Code block */
+pre {
+  border-radius: 4px;
+}
+
+/* React Markdown creates another pre tag inside the existing pre tag */
+pre > pre {
+  padding-bottom: 0px !important;
+}
+
 /* ! AREA RESOLUTION */
 .Resolution {
   min-height: 90vh;
@@ -34,7 +44,7 @@
   flex-direction: column;
   justify-content: space-between;
  
-  padding: 24px;
+  padding: 24px 32px;
   border: var(--mainBorder);
 }
 
