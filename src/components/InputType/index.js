@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./index.css";
+// Assets
+import { Check2, X, ArrowReturnRight } from "../../assets/Icons";
 
 /**
  * ! TrueOrFalse
@@ -40,9 +42,7 @@ const TrueOrFalse = ({ options, setUserInput }) => {
             }}
           />
           <label className="btn btn-outline-dark" htmlFor="option-true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check2" viewBox="0 0 16 16">
-              <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-            </svg>
+            <span><Check2 /></span>
             Correto
           </label>
         </div>
@@ -62,9 +62,7 @@ const TrueOrFalse = ({ options, setUserInput }) => {
             }}
           />
           <label className="btn btn-outline-dark" htmlFor="option-false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
-              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-            </svg>
+            <span><X /></span>
             Incorreto
           </label>
         </div>
@@ -106,10 +104,7 @@ const Written = ({ setUserInput }) => {
       <label className="form-label">Digite sua resposta abaixo:</label>
       <div className="input-group">
         <span className="input-group-text">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            className="bi bi-arrow-return-right" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
-          </svg>
+          <ArrowReturnRight />
         </span>
         <textarea 
           className="form-control" 
