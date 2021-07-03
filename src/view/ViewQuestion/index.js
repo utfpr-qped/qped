@@ -64,8 +64,19 @@ const ViewQuestion = ({ match }) => {
     // eslint-disable-next-line
     const correctAnswer = eval(`(${question.answer})(${JSON.stringify(question.values)})`)
 
+    // check if user input is of type 'object', so it can be compared to the correct answer (which is of type 'object')
+    let formattedUserInput = userInput
+    if (typeof(userInput) !== 'object') {
+      // if user separates the answer with a comma, then it is ready for JSON.parse()
+      // if not, then it is implied that it is devided by white spaces, therefore, replace each white space for a comma
+      if (!userInput.includes(",")) formattedUserInput = formattedUserInput.replace(/\s/g, ',')
+      
+      // format user input to look like an object
+      formattedUserInput = JSON.parse('[' + formattedUserInput + ']')
+    }
+
     // check whether the answer that the user entered is correct or not
-    userInput.toString() === correctAnswer.toString() ? setIsAnswerCorrect(true) : setIsAnswerCorrect(false)
+    formattedUserInput.toString() === correctAnswer.toString() ? setIsAnswerCorrect(true) : setIsAnswerCorrect(false)
 
     setCorrectAnswer(correctAnswer)
   }
