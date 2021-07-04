@@ -11,6 +11,36 @@
  */
 
 export const questions = {
+  // ! Subject: Sorting
+  ordenacao: [
+    {
+      id: 'ordenacao-1',
+      title: 'Ordenação #1',
+      text: `
+Utilizando o método de ordenação **{metodo}**, quantas trocas são necessárias para que a sequência abaixo:
+\`\`\`
+{sequencia=1:10:5}
+\`\`\`
+Seja ordenada de modo **{opcoes}**?
+<metodo>
+  <sort value="bubble">Bolha</sort>
+  <sort value="selection">Seleção</sort>
+  <sort value="insertion">Inserção</sort>
+</metodo>
+<opcoes>
+  <item value="ascending">crescente</item>
+  <item value="descending">decrescente</item>
+</opcoes>
+      `,
+      answer: function (values, blocks) {
+        console.log(values, blocks)//values = Array(), blocks = undefined
+        return [Math.random().toFixed(1)*10]//simular uma resposta
+      },
+      subject: 'Ordenacao',
+      level: 2,
+      tags: ['ordenação']
+    }
+  ],
   // ! Subject: Search
   busca: [
     {

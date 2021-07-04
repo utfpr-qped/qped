@@ -31,6 +31,7 @@ function parseQuestion(question) {
     level: question.level,
     tags: question.tags,
     values: parser.getAllValues(),
+    blocks: parser.options,
     options: generateOptions(false),
     trueOrFalseOptions: generateOptions(true)
   })

@@ -46,7 +46,7 @@ const ViewQuestion = ({ match }) => {
       setShouldLoadQuestion(false)
 
       setUserInput('')// clear user input
-
+      
       let subject = match.params.subject
       let idQuestion = match.params.idQuestion
       let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
@@ -62,7 +62,7 @@ const ViewQuestion = ({ match }) => {
 
     // get the correct answer for that question
     // eslint-disable-next-line
-    const correctAnswer = eval(`(${question.answer})(${JSON.stringify(question.values)})`)
+    const correctAnswer = eval(`(${question.answer})(${JSON.stringify(question.values)},${JSON.stringify(question.blocks)})`)
 
     // check if user input is of type 'object', so it can be compared to the correct answer (which is of type 'object')
     let formattedUserInput = userInput
