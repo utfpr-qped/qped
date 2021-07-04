@@ -179,5 +179,47 @@ void fun(int n) {
       level: 1,
       tags: ['ordem de remoção', 'fila']
     },
+  ],
+  // ! Subject: LinkedList
+  lista: [
+    {
+      id: 'lista-1',
+      title: 'Lista duplamente encadeada',
+      text: `
+A lista duplamente encadeada **l** possui os seguintes elementos:
+\`\`\`
+{lista=1:10:5}
+\`\`\`
+Sabendo que a função **addNode** cria e insere um novo nó entre os nós **ant** e **prox** que são recebidos por parâmetro.
+\`\`\`
+node *addNode(node *ant, int valor, node *prox) {
+  ...
+\\}
+\`\`\`
+Qual a nova sequência da lista, após a execução das seguintes instruções?
+\`\`\`    
+addNode(l→first, {a=1:10}, l→first→prox);
+addNode(addNode(l->last->ant, {b=1:10}, l->last), {c=1:10}, l->last);
+\`\`\`    
+      `,
+      answer: function (values) {
+        let { lista, a, b, c } = values
+        let _lista = [...lista] 
+        
+        // Simulate a Doubly Linked List behaviour using an Array
+
+        // Simulate first instruction => addNode(l→first, "a", l→first→prox);
+        _lista.splice(1, 0, a)
+
+        // Simulate second instruction => addNode(addNode(l->last->ant, "b", l->last), "c", l->last);
+        _lista.splice(_lista.length-1, 0, b)
+        _lista.splice(_lista.length-1, 0, c)
+
+        return _lista
+      },
+      subject: 'Lista',
+      level: 2,
+      tags: ['lista', 'lista duplamente encadeada']
+    }
   ]
 }
