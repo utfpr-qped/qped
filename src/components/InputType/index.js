@@ -106,7 +106,7 @@ const Written = ({ options, setUserInput }) => {
   }, [options])
 
   return (
-    <div className="Written mb-3 w-50">
+    <div className="Written mb-3 w-75">
       <label className="form-label">Digite sua resposta abaixo:</label>
       <div className="input-group">
         <span className="input-group-text">

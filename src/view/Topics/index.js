@@ -29,8 +29,8 @@ const Topics = () => {
   }
 
   return (
-    <div className="Topics container w-50">
-      <header className="mt-5 mb-4">
+    <div className="Topics container w-50 py-5">
+      <header className="mb-4">
         <h1 className="mb-4">Tópicos</h1>
 
         <ReactSearchAutocomplete
