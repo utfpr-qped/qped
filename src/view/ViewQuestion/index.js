@@ -46,7 +46,7 @@ const ViewQuestion = ({ match }) => {
       setShouldLoadQuestion(false)
 
       setUserInput('')// clear user input
-      
+
       let subject = match.params.subject
       let idQuestion = match.params.idQuestion
       let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
@@ -66,11 +66,11 @@ const ViewQuestion = ({ match }) => {
 
     // check if user input is of type 'object', so it can be compared to the correct answer (which is of type 'object')
     let formattedUserInput = userInput
-    if (typeof(userInput) !== 'object') {
+    if (typeof (userInput) !== 'object') {
       // if user separates the answer with a comma, then it is ready for JSON.parse()
       // if not, then it is implied that it is devided by white spaces, therefore, replace each white space for a comma
       if (!userInput.includes(",")) formattedUserInput = formattedUserInput.replace(/\s/g, ',')
-      
+
       // format user input to look like an object
       formattedUserInput = JSON.parse('[' + formattedUserInput + ']')
     }
@@ -247,9 +247,9 @@ const ViewQuestion = ({ match }) => {
               handleNextQuestion={handleNextQuestion}
             />
           ) : (
-            <Default 
-              handleQuestionAnswered={handleQuestionAnswered} 
-              isAnswerable={userInput ? true : false} 
+            <Default
+              handleQuestionAnswered={handleQuestionAnswered}
+              isAnswerable={userInput ? true : false}
             />
           )}
         </div>

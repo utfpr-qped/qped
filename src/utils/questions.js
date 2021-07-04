@@ -33,8 +33,8 @@ Seja ordenada de modo **{opcoes}**?
 </opcoes>
       `,
       answer: function (values, blocks) {
-        console.log(values, blocks)//values = Array(), blocks = undefined
-        return [Math.random().toFixed(1)*10]//simular uma resposta
+        console.log(values, blocks)
+        return [Math.random().toFixed(1) * 10]//simular uma resposta
       },
       subject: 'Ordenacao',
       level: 2,
@@ -234,16 +234,16 @@ addNode(addNode(l->last->ant, {b=1:10}, l->last), {c=1:10}, l->last);
       `,
       answer: function (values) {
         let { lista, a, b, c } = values
-        let _lista = [...lista] 
-        
+        let _lista = [...lista]
+
         // Simulate a Doubly Linked List behaviour using an Array
 
         // Simulate first instruction => addNode(l→first, "a", l→first→prox);
         _lista.splice(1, 0, a)
 
         // Simulate second instruction => addNode(addNode(l->last->ant, "b", l->last), "c", l->last);
-        _lista.splice(_lista.length-1, 0, b)
-        _lista.splice(_lista.length-1, 0, c)
+        _lista.splice(_lista.length - 1, 0, b)
+        _lista.splice(_lista.length - 1, 0, c)
 
         return _lista
       },

@@ -36,6 +36,7 @@ function parseQuestion(question) {
     trueOrFalseOptions: generateOptions(true)
   })
 
+
   /**
    * Gera opcoes para uma questao com a resposta correta e mais valores gerados aleatoriamente
    * @param {Boolean} trueOrFalse Se o tipo da questao for verdadeiro ou falso, apenas duas opcoes sao retornadas
@@ -43,7 +44,7 @@ function parseQuestion(question) {
    */
   function generateOptions(trueOrFalse) {
     const seeds = []
-    const options = [question.answer(parser.getAllValues())]
+    const options = [question.answer(parser.getAllValues(), parser.options)]
 
     let numberOfOptions = 5
     if (trueOrFalse) {
@@ -56,7 +57,7 @@ function parseQuestion(question) {
     generate:
     for (let i = 0; i < numberOfOptions - 1;) {
       const randomInt = generateSeed(seeds)
-      const option = question.answer(parser.getAllValues(randomInt))
+      const option = question.answer(parser.getAllValues(randomInt), parser.options)
       for (let j = 0; j < options.length; j++) {
         if (helper.compareArrays(options[j], option)) {
           continue generate
