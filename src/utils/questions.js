@@ -17,24 +17,88 @@ export const questions = {
       id: 'ordenacao-1',
       title: 'Ordenação #1',
       text: `
-Utilizando o método de ordenação **{metodo}**, quantas trocas são necessárias para que a sequência abaixo:
+Quantas trocas são necessárias para que a sequência abaixo seja ordenada de modo crescente?
 \`\`\`
-{sequencia=1:10:5}
+{sequencia=1:10:{6:10}}
 \`\`\`
-Seja ordenada de modo **{opcoes}**?
+Utilize o seguinte método de ordenação:
+\`\`\`
+{metodo}
+\`\`\`
 <metodo>
-  <sort value="bubble">Bolha</sort>
-  <sort value="selection">Seleção</sort>
-  <sort value="insertion">Inserção</sort>
+  <sort value="bubble">void bubbleSort(int arr[], int n)</sort>
+  <sort value="selection">void selectionSort(int arr[], int n)</sort>
+  <sort value="insertion">void insertionSort(int arr[], int n)</sort>
 </metodo>
-<opcoes>
-  <item value="ascending">crescente</item>
-  <item value="descending">decrescente</item>
-</opcoes>
+---
+Alguma dúvida? Consulte a referência para esta questão [aqui](http://google.com.br).
       `,
       answer: function (values, blocks) {
-        console.log(values, blocks)
-        return [Math.random().toFixed(1) * 10]//simular uma resposta
+        const arr = [...values.sequencia]
+        const metodo = blocks.metodo
+        const resp = []
+        let swapCounter = 0
+
+        switch (metodo) {
+          case 'bubble':
+            let swapped;
+            do {
+              swapped = false;
+              for (let i = 0; i < arr.length; i++) {
+                if (arr[i] > arr[i + 1]) {
+                  swapCounter++;// incrementar a qtd de trocas feitas
+                  let tmp = arr[i];
+                  arr[i] = arr[i + 1];
+                  arr[i + 1] = tmp;
+                  swapped = true;
+                }
+              }
+            } while (swapped);
+            resp.push(swapCounter)
+            break;
+
+          case 'selection':
+            for (let i = 0; i < arr.length; i++) {
+              // Encontrar o menor numero no subarray
+              let min = i;
+              for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[min]) {
+                  min = j;
+                }
+              }
+              if (min != i) {
+                // Trocar os elementos
+                let tmp = arr[i];
+                arr[i] = arr[min];
+                arr[min] = tmp;
+                swapCounter++;// incrementar a qtd de trocas feitas
+              }
+            }
+            resp.push(swapCounter);
+            break;
+
+          case 'insertion':
+            for (let i = 1; i < arr.length; i++) {
+              // Escolhendo o primeiro elemento no subarray nao ordenado
+              let current = arr[i];
+              // O ultimo elemento do array ordenado
+              let j = i - 1;
+              while ((j > -1) && (current < arr[j])) {
+                arr[j + 1] = arr[j];
+                j--;
+                swapCounter++;// incrementar a qtd de trocas feitas
+              }
+              arr[j + 1] = current;
+            }
+            resp.push(swapCounter)
+            break;
+
+          default:
+            resp.push(-1)
+            break;
+        }
+
+        return resp
       },
       subject: 'Ordenacao',
       level: 2,
