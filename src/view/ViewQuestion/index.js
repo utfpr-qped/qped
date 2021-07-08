@@ -32,6 +32,9 @@ const ViewQuestion = ({ match }) => {
   const [selectedLevel, setSelectedLevel] = useState('easy')
   const [showLevel, setShowLevel] = useState(false)
 
+  // Store the initial time the user started to solve the question
+  const [timer, setTimer] = useState({ startedAt: null })
+
   useEffect(() => {
     /* 
       * Find the question and display it onscreen
@@ -52,12 +55,32 @@ const ViewQuestion = ({ match }) => {
       let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
 
       setQuestion(question)
+
+      // once the question is loaded onscreen, set the current time in seconds to the timer
+      setTimer({ startedAt: Math.floor(new Date() / 1000) })
     }
 
   }, [match.params.subject, match.params.idQuestion, shouldLoadQuestion])
 
+  // Update localStorage with the new event
+  const updateStorage = (event) => {
+    /* 
+     Check if localstorage already has history
+     - if it does, copy the existing content to a new array, push a new event and then set the new array at the localstorage
+     - if it does not, create a new array, add the new event and then set it to the localstorage
+    */
+
+    let history = JSON.parse(localStorage.getItem('history'))
+    let new_history = history ? [...history, event] : [event]
+    localStorage.setItem('history', JSON.stringify(new_history))
+  }
+  
   // Activates when user tries to answer the question
   const handleQuestionAnswered = () => {
+    // get the current time, then subtract it by the time the user started to solve the question
+    // then return the total time in seconds, which is also the time spent in total
+    let secondsInTotal = (Math.floor(new Date() / 1000)) - (timer.startedAt)
+    
     setDidUserAnswer(true)
 
     // get the correct answer for that question
@@ -76,8 +99,24 @@ const ViewQuestion = ({ match }) => {
     }
 
     // check whether the answer that the user entered is correct or not
-    formattedUserInput.toString() === correctAnswer.toString() ? setIsAnswerCorrect(true) : setIsAnswerCorrect(false)
+    const isAnswerCorrect = formattedUserInput.toString() === correctAnswer.toString()
 
+    // create an event after the question has been answered
+    // TODO: get the username dinamically
+    const event = {
+      username: 'Nome do Aluno',
+      questionId: question.id,
+      inputLevel: selectedLevel,
+      userAnswer: formattedUserInput.toString(),
+      isAnswerCorrect: isAnswerCorrect,
+      date: new Date(),
+      timeSpent: secondsInTotal
+    }
+    
+    // save event to localStorage
+    updateStorage(event)
+
+    setIsAnswerCorrect(isAnswerCorrect)
     setCorrectAnswer(correctAnswer)
   }
 
