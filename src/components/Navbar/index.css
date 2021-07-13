@@ -5,27 +5,67 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #222;
+  background-color: var(--bs-gray-dark);
   color: #fdfdfd;
   overflow-x: hidden;
   padding: 36px 20px;
 }
 
 nav .brand {
-  margin-bottom: 32px;
+  margin-bottom: 3rem;
+}
+
+nav .brand div.h3 {
+  background: -webkit-linear-gradient(180deg, hsl(216deg, 98%, 52%), hsl(216, 98%, 90%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 nav .brand span {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(146, 146, 146);
 }
 
 nav div.nav-menu {
   display: flex;
   flex-direction: column;
+  transition: all 500ms;
 }
 
 nav div.nav-menu a {
+  font-size: 1.0625em;
+  color: var(--light) !important;
   font-weight: 600;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
+  transition: ease-in-out 100ms;
+}
+
+nav div.nav-menu a:hover {
+  color: var(--lightBlue) !important;
+}
+
+nav div.nav-menu a[aria-current="page"]::before {
+  color: var(--lightBlue) !important;
+  content: "•";
+  margin-right: 6px;
+}
+
+.nav-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 36px 20px;
+  width: 100%;
+}
+
+.nav-footer svg {
+  width: 24px;
+  height: 24px;
+  transition: ease-in-out 100ms;
+  opacity: 0.5;
+}
+
+.nav-footer svg:hover {
+  opacity: 1;
 }

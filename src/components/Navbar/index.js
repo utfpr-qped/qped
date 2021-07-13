@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './index.css';
+// Assets
+import { GithubFill } from "../../assets/Icons";
 
 const Navbar = () => {
   const handleDownload = () => {
@@ -14,16 +16,19 @@ const Navbar = () => {
   return (
     <nav className="sidenav">
       <div className="brand">
-        <div className="h4">QPED</div>
+        <div className="h3">QPED</div>
         <span>Questões para <br/>Estrutura de Dados</span>
       </div>
 
       <div className="nav-menu">
-        <Link to="/" className="text-light">Início</Link>
-        <Link to="/topics" className="text-light">Tópicos</Link>
-        <Link to="/about" className="text-light">Sobre</Link>
-        <Link to="/help" className="text-light">Ajuda</Link>
-        { localStorage.getItem('history') && <Link to="/" className="text-muted" onClick={handleDownload}>Baixar Histórico</Link> }
+        <NavLink exact to="/">Início</NavLink>
+        <NavLink exact to="/topics">Questões</NavLink>
+        <NavLink to="/about">Sobre</NavLink>
+        <NavLink to="/help">Ajuda</NavLink>
+      </div>
+
+      <div className="nav-footer">
+        <span><GithubFill /></span>
       </div>
     </nav>
   );
