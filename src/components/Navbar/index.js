@@ -4,15 +4,6 @@ import './index.css';
 import { GithubFill } from "../../assets/Icons";
 
 const Navbar = () => {
-  const handleDownload = () => {
-    //TODO: this function and the download button is only for testing
-    const element = document.createElement("a");
-    const blob = new Blob([localStorage.getItem('history')], {type: 'application/json'}); //pass data from localStorage API to blob
-    element.href = URL.createObjectURL(blob);
-    element.download = "history.json";
-    element.click();
-  }
-
   return (
     <nav className="sidenav">
       <div className="brand">
