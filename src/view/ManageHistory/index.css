@@ -1,0 +1,10 @@
+.ManageHistory section.records-table > header {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.ManageHistory section.records-table > header > .actions-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

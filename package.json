@@ -12,6 +12,7 @@
     "react-markdown": "^6.0.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "react-search-autocomplete": "^5.2.2",
     "react-syntax-highlighter": "^15.4.3",

@@ -12,10 +12,9 @@ for (const topic in rawQuestions) {
       questions[topic] = []
     }
     questions[topic].push({
-      subject: question.subject,
       id: question.id,
-      title: question.title,
-      subject: question.subject
+      subjectTitle: question.subjectTitle,
+      level: question.level
     })
   })
 }
@@ -24,12 +23,11 @@ function parseQuestion(question) {
   const parser = new QuestionParser(question.text)
   return Object.freeze({
     id: question.id,
-    title: question.title,
+    subject: question.subject,
     text: parser.getText(),
     answer: question.answer.toString(),
-    subject: question.subject,
     level: question.level,
-    tags: question.tags,
+    keywords: question.keywords,
     values: parser.getAllValues(),
     blocks: parser.options,
     options: generateOptions(false),

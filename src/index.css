@@ -2,12 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
 :root {
+  --primary: #0d6efd;
   --secondary: #6C757D;
   --light: #F8F9FA;
-  --dark: #343A40;
+  --dark: #343A40; /* rename to globalDark */
   --correct: #6EFF02;
   --incorrect: #ff1e00;
   --lightBorder:#e5e5e5;
+  --lightBlue: hsl(216deg, 98%, 75%);
+  --grayishBlue: hsl(210, 20%, 97%);
+  --muted: #6C757D;
 
   --mainBorder: 2px solid #e5e5e5;
 }
@@ -21,7 +25,7 @@ html, body, #root {
 body {
   font-family: 'Nunito', sans-serif;
   background-color: #fdfdfd;
-  color: #3c3c3c;
+  color: var(--dark);
 }
 
 h1, h2, h3, h4, h5, h6,

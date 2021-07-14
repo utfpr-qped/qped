@@ -49,10 +49,17 @@ const ViewQuestion = ({ match }) => {
       setShouldLoadQuestion(false)
 
       setUserInput('')// clear user input
-
-      let subject = match.params.subject
+      
       let idQuestion = match.params.idQuestion
-      let question = parseQuestion(rawQuestions[`${subject}`].find(element => element.id === idQuestion))
+      
+      let questionSearched = null
+      Object.keys(rawQuestions).forEach(index => {
+        rawQuestions[index].forEach(question => {
+          if (question.id === idQuestion) questionSearched = question
+        }) 
+      })
+
+      let question = parseQuestion(questionSearched)
 
       setQuestion(question)
 
@@ -102,9 +109,8 @@ const ViewQuestion = ({ match }) => {
     const isAnswerCorrect = formattedUserInput.toString() === correctAnswer.toString()
 
     // create an event after the question has been answered
-    // TODO: get the username dinamically
     const event = {
-      username: 'Nome do Aluno',
+      subject: question.subject,
       questionId: question.id,
       inputLevel: selectedLevel,
       userAnswer: formattedUserInput.toString(),
@@ -162,12 +168,12 @@ const ViewQuestion = ({ match }) => {
           <div className="body">
             {/* Link that goes back to the topic list */}
             <div className="mb-3">
-              <Link to="/topics" className="fw-bolder subject">{`← ${question.subject}`}</Link>
+              <Link to="/topics" className="fw-bolder subject">← Voltar</Link>
             </div>
 
             {/* Title of the question */}
             <div className="mb-3">
-              <h2 className="h2 mb-3">{question.title}</h2>
+              <h2 className="h2 mb-3">{question.id}</h2>
             </div>
 
             {/* Question text in markdown */}
@@ -192,9 +198,9 @@ const ViewQuestion = ({ match }) => {
 
           <div className="tags mb-6">
             {/* Iterate the tags array for that question and display it onscreen  */}
-            {question.tags && (
-              Object.keys(question.tags).map((tagObj, index) => {
-                return <div className="badge-tags me-1" key={index}>{question.tags[index]}</div>
+            {question.keywords && (
+              Object.keys(question.keywords).map((tagObj, index) => {
+                return <div className="badge-tags me-1" key={index}>{question.keywords[index]}</div>
               })
             )}
           </div>

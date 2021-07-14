@@ -11,11 +11,10 @@
  */
 
 export const questions = {
-  // ! Subject: Sorting
-  ordenacao: [
+  sortingAlgorithms: [
     {
       id: 'ordenacao-1',
-      title: 'Ordenação #1',
+      subject: 'Algoritmos de ordenação',
       text: `
 Quantas trocas são necessárias para que a sequência abaixo seja ordenada de modo crescente?
 \`\`\`
@@ -100,16 +99,14 @@ Alguma dúvida? Consulte a referência para esta questão [aqui](http://google.c
 
         return resp
       },
-      subject: 'Ordenacao',
       level: 2,
-      tags: ['ordenação']
+      keywords: ['keyword1', 'keyword2']
     }
   ],
-  // ! Subject: Search
-  busca: [
+  searchingAlgorithms: [
     {
       id: 'busca-1',
-      title: 'Busca sequencial #1',
+      subject: 'Algoritmos de busca',
       text: `
 Suponha que você está realizando uma busca sequencial no vetor: \`[{vet=3:13:+{6:11}}]\`
 
@@ -129,13 +126,12 @@ Quantas comparações serão realizadas se o valor buscado for **{valor=3:13}**?
         answer.push(vet.length + 1)
         return answer
       },
-      subject: 'Busca',
       level: 1,
-      tags: ['busca sequencial', 'busca']
+      keywords: ['busca sequencial', 'busca']
     },
     {
       id: 'busca-2',
-      title: 'Busca sequencial #2',
+      subject: 'Algoritmos de busca',
       text: `Considere o método de busca sequencial em um vetor contendo os elementos: \`[{vet=2:23:+{5:10}}]\` 
       
 Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **{valor=2:23}**?
@@ -155,13 +151,12 @@ Qual deve ser o retorno da busca quando o usuário pesquisar pelo item **{valor=
         answer.push(-1)
         return answer
       },
-      subject: 'Busca',
       level: 1,
-      tags: ['busca sequencial', 'busca']
+      keywords: ['busca sequencial', 'busca']
     },
     {
       id: 'busca-3',
-      title: 'Busca sequencial otimizada',
+      subject: 'Algoritmos de busca',
       text: `
 Suponha que seja feita uma busca sequencial otimizada no vetor a seguir, o qual deve ser ordenado antes da busca. 
 \`\`\`
@@ -206,16 +201,14 @@ Quantas comparações serão realizadas se o valor a ser buscado for **{valor=1:
         answer.push(sortedArray.length)
         return answer
       },
-      subject: 'Busca',
       level: 1,
-      tags: ['busca', 'busca otimizada', 'busca sequencial']
+      keywords: ['busca', 'busca otimizada', 'busca sequencial']
     }
   ],
-  // ! Subject: Stack
-  pilha: [
+  stack: [
     {
       id: 'pilha-1',
-      title: 'Simulaçao com Pilhas',
+      subject: 'Pilha estática e dinâmica',
       text: `
 Considerando a função a seguir que recebe um número como argumento e utiliza a pilha S para processá-lo.
 
@@ -249,16 +242,14 @@ void fun(int n) {
 
         return poppedItems
       },
-      subject: 'Pilha',
       level: 1,
-      tags: ['pilha', 'simulação']
+      keywords: ['pilha', 'simulação']
     }
   ],
-  // ! Subject: Queue
-  fila: [
+  queue: [
     {
       id: 'fila-1',
-      title: 'Ordem de remoção em uma fila',
+      subject: 'Fila',
       text: `Se os elementos abaixo são adicionados a uma fila e são depois removidos da fila, em qual ordem eles serão removidos? \`[{vet=1:10:{3:6}}]\``,
       answer: function (values) {
         const { vet } = values
@@ -269,16 +260,14 @@ void fun(int n) {
         }
         return answer
       },
-      subject: 'Fila',
       level: 1,
-      tags: ['ordem de remoção', 'fila']
+      keywords: ['ordem de remoção', 'fila']
     },
   ],
-  // ! Subject: LinkedList
-  lista: [
+  linkedList: [
     {
       id: 'lista-1',
-      title: 'Lista duplamente encadeada',
+      subject: 'Lista encadeada',
       text: `
 A lista duplamente encadeada **l** possui os seguintes elementos:
 \`\`\`
@@ -311,9 +300,8 @@ addNode(addNode(l->last->ant, {b=1:10}, l->last), {c=1:10}, l->last);
 
         return _lista
       },
-      subject: 'Lista',
       level: 2,
-      tags: ['lista', 'lista duplamente encadeada']
+      keywords: ['lista', 'lista duplamente encadeada']
     }
   ]
 }
