@@ -33,8 +33,8 @@ const Home = () => {
       let formatToMinutes = Math.round(secondsCounter / 60)
 
       const new_summary = [
-        { title: practiceCounter, desc: "questões praticadas'" },
-        { title: correctQuestionsCounter, desc: "questões corretas'" },
+        { title: practiceCounter, desc: "questões praticadas" },
+        { title: correctQuestionsCounter, desc: "questões corretas" },
         { title: formatToMinutes, desc: "total de minutos" }
       ]
 
