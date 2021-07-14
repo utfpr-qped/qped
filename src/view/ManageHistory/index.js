@@ -1,11 +1,39 @@
+import { useState } from "react";
 import FluidHeading from "../../components/FluidHeading";
 
 import './index.css'
 
 const ManageHistory = () => {
+  const [eventList, setEventList] = useState([])
+
+  const readJSONFile = file => {
+    // Check if the file is a JSON
+    if (file.type && !file.type.startsWith('application/json')) {
+      console.log('Arquivo não é um JSON.', file.type, file)
+      return
+    }
+
+    const reader = new FileReader()
+
+    reader.addEventListener('load', function (e) {
+      let parsed = JSON.parse(e.target.result)
+      setEventList(parsed.history)
+    })
+
+    reader.readAsText(file)
+  }
+
+  const handleChange = e => {
+    //TODO: should data of the file uploaded be stored in localStorage or global state to be used later?
+    //returns list of files uploaded by the user during that session
+    const fileList = e.target.files
+    //get only file uploaded by accessing index 0 of the FileList array, returns a File object
+    readJSONFile(fileList[0])
+  }
+
   return (
     <>
-      <FluidHeading title={"Início"} />
+      <FluidHeading title={"Gerenciar"} />
 
       <div className="ManageHistory container-fluid">
         <div className="row">
@@ -15,7 +43,7 @@ const ManageHistory = () => {
               <h2 className="h4">Consultar histórico</h2>
               <p className="text-muted mb-0">Importe um arquivo de histórico e visualize abaixo.</p>
               <div className="actions-wrapper">
-                <div className="btn btn-dark">
+                <label htmlFor="uploadButton" className="btn btn-dark">
                   <span className="me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                       <path fillRule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z" />
@@ -23,7 +51,8 @@ const ManageHistory = () => {
                     </svg>
                   </span>
                   Importar
-                </div>
+                </label>
+                <input type="file" id="uploadButton" onChange={handleChange} accept=".json" hidden />
               </div>
             </header>
 
@@ -33,27 +62,45 @@ const ManageHistory = () => {
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Tópico</th>
                     <th scope="col">Resposta</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col">Tempo</th>
+                    <th scope="col">Tempo (minutos)</th>
+                    <th scope="col">Data</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">ordenacao-1</th>
-                    <td>Algoritmos de ordenação</td>
-                    <td>✅ [120, 254, 215, 15, 264]</td>
-                    <td>Tipo 1</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">ordenacao-1</th>
-                    <td>Arvore binaria</td>
-                    <td>❌ [129, 10298, 823, 9842, 12]</td>
-                    <td>Tipo 1</td>
-                    <td>15</td>
-                  </tr>
+                  {
+                    // Returns rows populated with the data of one Event History file
+                    eventList.length ? (
+                      eventList.map(eventItem => {
+                        // format type
+                        let type = eventItem.inputLevel
+                        let formattedType =
+                          type === 'easy' ? 'TrueOrFalse'
+                            : type === 'medium' ? 'MultipleChoice'
+                              : type === 'hard' ? 'Written'
+                                : 'Outro'
+
+                        // format date to 'dd/mm/yyyy'
+                        let date = new Date(eventItem.date)
+                        let formattedDate = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear()
+
+                        return (
+                          <tr>
+                            <th scope="row">{eventItem.questionId}</th>
+                            <td>{eventItem.isAnswerCorrect ? '✅' : '❌'} {eventItem.userAnswer}</td>
+                            <td>{formattedType}</td>
+                            <td>{Math.round(eventItem.timeSpent / 60)}</td>
+                            <td>{formattedDate}</td>
+                          </tr>
+                        )
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan="5" className="text-muted">Nenhum arquivo selecionado.</td>
+                      </tr>
+                    )
+                  }
                 </tbody>
               </table>
             </div>

@@ -3,21 +3,7 @@ import './index.css';
 // Assets
 import { GithubFill } from "../../assets/Icons";
 
-import { runHash } from "../../utils/hash.js"
-
-const Navbar = () => {
-  const handleDownload = () => {
-    //TODO: this function and the download button is only for testing
-    const element = document.createElement("a");
-    const history = localStorage.getItem('history')
-    const hash = runHash(history)
-    const exportHistory = JSON.stringify({ hash, history: JSON.parse(history) })
-    const blob = new Blob([exportHistory], { type: 'application/json' }); //pass data from localStorage API to blob
-    element.href = URL.createObjectURL(blob);
-    element.download = "history.json";
-    element.click();
-  }
-  
+const Navbar = () => {  
   return (
     <nav className="sidenav">
       <div className="brand">

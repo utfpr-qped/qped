@@ -1,26 +1,63 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
 import FluidHeading from "../../components/FluidHeading";
 import SummaryCard from '../../components/SummaryCard'
 import { ExportCard } from '../../components/EventsHistoryActions';
+
+import { runHash } from "../../utils/hash.js"
 
 import './index.css'
 
 const Home = () => {
   // The data that will be rendered in the Summary section
   const [summary, setSummary] = useState([
-    { title: '12', desc: 'questões praticadas' },
-    { title: '10', desc: 'questões corretas' },
-    { title: '54', desc: 'total de minutos' }
+    { title: 0, desc: 'questões praticadas' },
+    { title: 0, desc: 'questões corretas' },
+    { title: 0, desc: 'total de minutos' }
   ])
 
+  useEffect(() => {
+    // read list of events from localStorage and store it as a state
+    if (localStorage.getItem('history')) {
+      const eventsList = JSON.parse(localStorage.getItem('history'))
+
+      let practiceCounter = 0
+      let correctQuestionsCounter = 0
+      let secondsCounter = 0
+      eventsList.forEach(event => {
+        practiceCounter++
+        event.isAnswerCorrect && correctQuestionsCounter++
+        secondsCounter += event.timeSpent
+      });
+
+      let formatToMinutes = Math.round(secondsCounter / 60)
+
+      const new_summary = [
+        { title: practiceCounter, desc: summary[0].desc },
+        { title: correctQuestionsCounter, desc: summary[1].desc },
+        { title: formatToMinutes, desc: summary[2].desc }
+      ]
+
+      setSummary(new_summary)
+    }
+  }, [setSummary])
+
   const handleExport = () => {
-    //TODO: this function and the download button is only for testing
-    alert('Exporting..')
-    // const element = document.createElement("a");
-    // const blob = new Blob([localStorage.getItem('history')], {type: 'application/json'}); //pass data from localStorage API to blob
-    // element.href = URL.createObjectURL(blob);
-    // element.download = "history.json";
-    // element.click();
+    //TODO: change verification method and feedback
+    //verify if localStorage exists
+    if (!localStorage.getItem('history')) {
+      alert('Não existe histórico ainda. Resolva uma questão e tente novamente.')
+      return
+    }
+
+    const element = document.createElement("a");
+    const history = localStorage.getItem('history')
+    const hash = runHash(history)
+    const exportHistory = JSON.stringify({ hash, history: JSON.parse(history) })
+    const blob = new Blob([exportHistory], { type: 'application/json' }); //pass data from localStorage API to blob
+    element.href = URL.createObjectURL(blob);
+    element.download = "history.json";
+    element.click();
   }
 
   return (
@@ -43,9 +80,7 @@ const Home = () => {
               </h2>
             </header>
             <div className="SummaryCard-wrapper">
-              <SummaryCard info={summary[0]} />
-              <SummaryCard info={summary[1]} />
-              <SummaryCard info={summary[2]} />
+              {summary.map(element => <SummaryCard info={element} />)}
             </div>
           </section>
         </div>
