@@ -109,9 +109,8 @@ const ViewQuestion = ({ match }) => {
     const isAnswerCorrect = formattedUserInput.toString() === correctAnswer.toString()
 
     // create an event after the question has been answered
-    // TODO: get the username dinamically
     const event = {
-      username: 'Nome do Aluno',
+      subject: question.subject,
       questionId: question.id,
       inputLevel: selectedLevel,
       userAnswer: formattedUserInput.toString(),
