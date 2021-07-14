@@ -33,9 +33,9 @@ const Home = () => {
       let formatToMinutes = Math.round(secondsCounter / 60)
 
       const new_summary = [
-        { title: practiceCounter, desc: summary[0].desc },
-        { title: correctQuestionsCounter, desc: summary[1].desc },
-        { title: formatToMinutes, desc: summary[2].desc }
+        { title: practiceCounter, desc: "questões praticadas'" },
+        { title: correctQuestionsCounter, desc: "questões corretas'" },
+        { title: formatToMinutes, desc: "total de minutos" }
       ]
 
       setSummary(new_summary)
