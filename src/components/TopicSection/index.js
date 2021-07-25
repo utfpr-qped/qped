@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import './index.css'
 
-const TopicSection = ({ questionList, sectionId, sectionTitle }) => {
+const TopicSection = ({ questionList, sectionId, sectionTitle, editSubject, isNewTopic }) => {
+  const route = editSubject ? `/edit-question/${editSubject}` : "/topics/question"
   return (
     <section id={sectionId} className="Topic">
       <div className="row">
@@ -13,24 +14,40 @@ const TopicSection = ({ questionList, sectionId, sectionTitle }) => {
 
         <div className="col-12">
           <div className="questionList">
-            {questionList.map(question =>
-              <Link
-                to={`/topics/question/${question.id}`}
-                key={question.id}
-              >
-                <div className="questionItem">
-                  <div><span className="title">{question.id}</span></div>
-                  <div><span className="level">
-                    {
-                      question.level === 1 ? 'Fácil'
-                        : question.level === 2 ? 'Médio'
-                          : question.level === 3 ? 'Difícil'
-                            : 'Nível'
-                    }
-                  </span></div>
-                </div>
-              </Link>
-            )}
+            {
+              isNewTopic ? null : (
+                questionList.map(question =>
+                  <Link
+                    to={`${route}/${question.id}`}
+                    key={question.id}
+                  >
+                    <div className="questionItem">
+                      <div><span className="title">{question.id}</span></div>
+                      <div><span className="level">
+                        {
+                          question.level === 1 ? 'Fácil'
+                            : question.level === 2 ? 'Médio'
+                              : question.level === 3 ? 'Difícil'
+                                : 'Nível'
+                        }
+                      </span></div>
+                    </div>
+                  </Link>
+                )
+              )
+            }
+            {
+              editSubject ? (
+                <Link
+                  to={`${route}/new`}
+                >
+                  <div className="questionItem">
+                    <div><span className="title">Nova questao</span></div>
+                    <div><span className="level">Nova</span></div>
+                  </div>
+                </Link>
+              ) : null
+            }
           </div>
         </div>
       </div>
