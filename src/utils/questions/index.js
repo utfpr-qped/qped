@@ -1,33 +1,36 @@
 /* eslint-disable */
 import { QuestionParser } from "./QuestionParser"
-import { questions as rawQuestions } from "./questions"
 import helpers from "../helpers"
 const helper = helpers()
 
-const questions = {}
-
-for (const topic in rawQuestions) {
-  rawQuestions[topic].forEach(question => {
-    if (questions[topic] === undefined) {
-      questions[topic] = []
-    }
-    questions[topic].push({
-      id: question.id,
-      subjectTitle: question.subjectTitle,
-      level: question.level
+function questionsTopics(rawQuestions) {
+  const questions = []
+  for (const topic in rawQuestions) {
+    rawQuestions[topic].forEach(question => {
+      if (questions[topic] === undefined) {
+        questions[topic] = []
+      }
+      questions[topic].push({
+        subject: question.subject,
+        id: question.id,
+        title: question.title,
+        subject: question.subject
+      })
     })
-  })
+  }
+  return questions
 }
 
 function parseQuestion(question) {
   const parser = new QuestionParser(question.text)
   return Object.freeze({
     id: question.id,
-    subject: question.subject,
+    title: question.title,
     text: parser.getText(),
     answer: question.answer.toString(),
+    subject: question.subject,
     level: question.level,
-    keywords: question.keywords,
+    tags: question.tags,
     values: parser.getAllValues(),
     blocks: parser.options,
     options: generateOptions(false),
@@ -87,4 +90,32 @@ function parseQuestion(question) {
   }
 }
 
-export { questions, rawQuestions, parseQuestion }
+function parseQuestionsString(rawQuestions) {
+  const questions = {}
+  const parsedQuestions = JSON.parse(rawQuestions)
+  for (const topic in parsedQuestions) {
+    parsedQuestions[topic].forEach(question => {
+      if (questions[topic] === undefined) {
+        questions[topic] = []
+      }
+      question.answer = parseFunction(question.answer) // transform answer from string to function
+      questions[topic].push(question)
+    })
+  }
+  return questions
+
+  function parseFunction(fn) {
+    return (0, eval)("(" + fn + ")")
+  }
+}
+
+function stringifyQuestionsFile(questions) {
+  return JSON.stringify(questions, function (key, value) {
+    if (typeof value === "function") {
+      return value.toString();
+    }
+    return value;
+  })
+}
+
+export { questionsTopics, parseQuestion, parseQuestionsString, stringifyQuestionsFile }

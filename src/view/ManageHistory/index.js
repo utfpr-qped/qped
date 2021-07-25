@@ -19,7 +19,6 @@ const ManageHistory = () => {
 
     reader.addEventListener('load', function (e) {
       let parsed = JSON.parse(e.target.result)
-      //setIntegrity(runHash(parsed.history) === parsed.hash)
       setIntegrity(runHash(JSON.stringify(parsed.history)) === parsed.hash)
       setEventList(parsed.history)
     })
