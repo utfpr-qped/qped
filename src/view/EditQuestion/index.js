@@ -30,7 +30,6 @@ const EditQuestion = ({ match }) => {
   const [code, setCode] = useState("")
   const [subject] = useState(match.params.subject)
 
-
   function saveQuestion(question) {
     const saveQuestions = questions
     if (!Array.isArray(saveQuestions[subject])) {
@@ -55,7 +54,7 @@ const EditQuestion = ({ match }) => {
       const question = idQuestion === "new"
         ? { id: "", text: "", answer: functionExample, subject, level: null, keywords: [] }
         : questions[`${subject}`].find(element => {
-          if(element.id === idQuestion) {
+          if (element.id === idQuestion) {
             element.answer = element.answer.toString()
             return element
           }

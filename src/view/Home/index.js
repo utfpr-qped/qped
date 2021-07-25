@@ -62,19 +62,6 @@ const Home = () => {
     element.download = "history.json";
     element.click();
   }
-  /*
-  const handleExport = () => {
-    //TODO: change verification method and feedback
-    //verify if localStorage exists
-    const q = stringifyQuestionsFile(questions)
-
-    const element = document.createElement("a");
-    const blob = new Blob([q], { type: 'application/json' }); //pass data from localStorage API to blob
-    element.href = URL.createObjectURL(blob);
-    element.download = "questions.json";
-    element.click();
-  }
-  */
 
   return (
     <>
