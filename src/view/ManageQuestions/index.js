@@ -4,11 +4,7 @@ import NewTopicSection from "../../components/NewTopicSection";
 import ImportQuestions from "../../components/ImportQuestions";
 import "./index.css";
 // Questions DB
-//import { parseQuestionsString, stringifyQuestionsFile } from "../../utils/questions/index";
-import { getParsedQuestions, setParsedQuestions } from "../../utils/questions/helper";
-
-import { repositories } from "../../utils/repositories"
-const repos = repositories()
+import { getParsedQuestions } from "../../utils/questions/helper";
 
 const Topics = () => {
   const [questions, setQuestions] = useState(getParsedQuestions())

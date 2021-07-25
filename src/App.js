@@ -7,6 +7,7 @@ import ManageHistory from "./view/ManageHistory";
 import ManageQuestions from "./view/ManageQuestions";
 import ViewQuestion from "./view/ViewQuestion";
 import Topics from "./view/Topics";
+import EditQuestion from "./view/EditQuestion";
 
 import './index.css';
 
@@ -23,6 +24,7 @@ function App() {
           {/*<Route path="/new" component={} /> */}
           <Route exact path="/topics" component={Topics} />
           <Route path="/topics/question/:idQuestion" component={ViewQuestion} />
+          <Route path="/edit-question/:subject/:idQuestion" component={EditQuestion} />
         </Switch>
       </main>
     </HashRouter>
