@@ -4,7 +4,7 @@ import TopicSection from "../../components/TopicSection";
 import { HashLink as Link } from "react-router-hash-link";
 import "./index.css";
 // Questions DB
-import { questions as database } from "../../utils/index";
+import { questions as database } from "../../utils/questions/index";
 import topicsHelper from "./topicsHelper"
 const helper = topicsHelper()
 

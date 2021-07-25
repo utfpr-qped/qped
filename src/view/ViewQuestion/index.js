@@ -9,9 +9,11 @@ import { Default, Answered } from "../../components/QuestionActions";
 // Styles
 import "./index.css";
 // Questions DB
-import { rawQuestions, parseQuestion } from "../../utils/index";
+import { rawQuestions, parseQuestion } from "../../utils/questions/index";
 // Assets
 import { LightningChargeFill } from "../../assets/Icons";
+import { repositories } from "../../utils/repositories";
+const repos = repositories()
 
 /**
  * ViewQuestion
@@ -77,9 +79,9 @@ const ViewQuestion = ({ match }) => {
      - if it does not, create a new array, add the new event and then set it to the localstorage
     */
 
-    let history = JSON.parse(localStorage.getItem('history'))
+    let history = JSON.parse(repos.getHistory())
     let new_history = history ? [...history, event] : [event]
-    localStorage.setItem('history', JSON.stringify(new_history))
+    repos.saveHistory(JSON.stringify(new_history))
   }
   
   // Activates when user tries to answer the question

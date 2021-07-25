@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { QuestionParser } from "./QuestionParser"
 import { questions as rawQuestions } from "./questions"
-import helpers from "./helpers"
+import helpers from "../helpers"
 const helper = helpers()
 
 const questions = {}
