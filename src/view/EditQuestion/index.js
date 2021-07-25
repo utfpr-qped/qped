@@ -58,6 +58,7 @@ const EditQuestion = ({ match }) => {
             element.answer = element.answer.toString()
             return element
           }
+          return {} 
         }
         )
 
