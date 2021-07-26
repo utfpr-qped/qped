@@ -18,7 +18,7 @@ function parseQuestions(questions) {
 }
 
 function getRemoteQuestions() {
-  const baseUrl = "https://gist.githubusercontent.com/Tashima42/cbb2caafec9fda2934ce782e53f0a5ef/raw/70827eee9a97a68bfb1307f1ba317c76a3e36414/qped-questions.json"
+  const baseUrl = "https://gist.githubusercontent.com/Tashima42/cbb2caafec9fda2934ce782e53f0a5ef/raw/"
   const questions = helper.httpGet(baseUrl)
   return questions
 }
