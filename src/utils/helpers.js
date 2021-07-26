@@ -1,9 +1,9 @@
-
 export default function helpers() {
   return Object.freeze({
     shuffleArray,
     randomInt,
     compareArrays,
+    httpGet,
   })
   //https://bost.ocks.org/mike/shuffle/
   function shuffleArray(array) {
@@ -44,5 +44,12 @@ export default function helpers() {
       }
     }
     return true;
+  }
+
+  function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", theUrl, false); // false for synchronous request
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
   }
 }

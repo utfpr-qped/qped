@@ -1,4 +1,4 @@
-import { setParsedQuestions } from "../../utils/questions/helper";
+import { setParsedQuestions, getRemoteQuestions } from "../../utils/questions/helper";
 
 const ImportQuestions = () => {
 
@@ -20,6 +20,12 @@ const ImportQuestions = () => {
     const fileList = e.target.files
     readJSONFile(fileList[0])
   }
+
+  function getRemote() {
+    setParsedQuestions(getRemoteQuestions())
+    window.location.reload()
+  }
+
   return (
     // TODO: arrumar textos e estilo
     <header>
@@ -37,6 +43,7 @@ const ImportQuestions = () => {
         </label>
         <input type="file" id="uploadButton" onChange={handleFileUpload} accept=".json" hidden />
       </div>
+      <button onClick={() => getRemote()}>REMOTO</button>
     </header>
   );
 }
