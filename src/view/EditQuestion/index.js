@@ -4,12 +4,8 @@ import { Link } from "react-router-dom";
 //import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 //import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 // Components
-//import InputType from "../../components/InputType";
-//import { Default, Answered } from "../../components/QuestionActions";
 // Styles
 import "./index.css";
-// Questions DB
-//import { parseQuestionsString } from "../../questions/index";
 // Code Editor
 import AceEditor from "react-ace"
 import "ace-builds/src-noconflict/mode-javascript"
@@ -23,11 +19,11 @@ import { stringifyQuestionsFile } from "../../utils/questions";
  * Display a question and its resolution area
  */
 const EditQuestion = ({ match }) => {
+
   const [shouldLoadQuestion, setShouldLoadQuestion] = useState(true)
 
   const [questions] = useState(getParsedQuestions())
   const [question, setQuestion] = useState({})
-  const [code, setCode] = useState("")
   const [subject] = useState(match.params.subject)
 
   function saveQuestion(question) {
@@ -35,8 +31,17 @@ const EditQuestion = ({ match }) => {
     if (!Array.isArray(saveQuestions[subject])) {
       saveQuestions[subject] = []
     }
-    saveQuestions[subject].push(question)
-    console.log(saveQuestions)
+    /*
+    if (typeof question.answer === "string") {
+      question.answer = parseFunction(question.answer)
+    }
+    */
+    const editIndex = saveQuestions[subject].findIndex((element) => element.id === question.id)
+    if (editIndex >= 0) {
+      saveQuestions[subject][editIndex] = question
+    } else {
+      saveQuestions[subject].push(question)
+    }
     setParsedQuestions(stringifyQuestionsFile(saveQuestions))
   }
 
@@ -44,7 +49,7 @@ const EditQuestion = ({ match }) => {
     if (shouldLoadQuestion) {
       setShouldLoadQuestion(false)
 
-      let idQuestion = match.params.idQuestion
+      const idQuestion = match.params.idQuestion
 
       const functionExample = `function (values, blocks) {
   const { a, b } = values
@@ -53,25 +58,22 @@ const EditQuestion = ({ match }) => {
 
       const question = idQuestion === "new"
         ? { id: "", text: "", answer: functionExample, subject, level: null, keywords: [] }
-        : questions[`${subject}`].find(element => {
-          if (element.id === idQuestion) {
-            element.answer = element.answer.toString()
-            return element
-          }
-          return {} 
-        }
-        )
+        : questions[subject].find(e => e.id === idQuestion)
 
-      setCode(question.answer)
+      if (typeof question.answer !== "string") {
+        question.answer = question.answer.toString()
+      }
+
       setQuestion(question)
     }
 
   }, [subject, match.params.idQuestion, shouldLoadQuestion, questions])
 
-  function onCodeChange(newCode) {
-    setCode(newCode)
+  function onChangeValue(value, property) {
+    const changeQuestion = question
+    changeQuestion[property] = value
+    setQuestion(changeQuestion)
   }
-
 
   return (
     <div className="EditQuestion container-fluid">
@@ -81,26 +83,27 @@ const EditQuestion = ({ match }) => {
           <div className="body">
             {/* Link that goes back to the topic list */}
             <div className="mb-3">
-              <Link to="/manage-questions" className="fw-bolder subject">{`← ${question.subject}`}</Link>
+              <Link to="/manage-questions" className="fw-bolder subject">{"← Manage Questions"}</Link>
             </div>
           </div>
           <div className="form">
             <form>
               <label>
                 Id:
-                <input type="text" name="id" placeholder={`${question.subject}-1`} value={question.id} />
+                <input type="text" name="id" placeholder={`${question.subject}-1`} defaultValue={question.id} onChange={(e) => { onChangeValue(e.target.value, "id") }} />
               </label><br />
               <label>
                 Text:
                 <textarea
                   placeholder="Quantas trocas são necessárias para que a sequência abaixo seja ordenada de modo crescente?"
                   defaultValue={question.text}
+                  onChange={(e) => { onChangeValue(e.target.value, "text") }}
                 >
                 </textarea>
               </label><br />
               <label>
                 Level:
-                <select id="level" value={question.level}>
+                <select id="level" defaultValue={question.level} onChange={(e) => { onChangeValue(e.target.value, "level") }}>
                   <option value={1}>facil</option>
                   <option value={2}>medio</option>
                   <option value={3}>dificil</option>
@@ -108,7 +111,11 @@ const EditQuestion = ({ match }) => {
               </label><br />
               <label>
                 Keywords:
-                <input type="text" name="title" placeholder="tag1, tag2, tag3" value={question.keywords} />
+                <input type="text" name="title" placeholder="tag1, tag2, tag3" defaultValue={question.keywords} onChange={(e) => {
+                  const { value } = e.target
+                  const saveValue = value.split(" ").join("").split(",")
+                  onChangeValue(saveValue, "keywords")
+                }} />
               </label><br />
             </form>
           </div>
@@ -117,12 +124,14 @@ const EditQuestion = ({ match }) => {
       <AceEditor
         mode="javascript"
         theme="dracula"
-        onChange={onCodeChange}
+        onChange={(c) => {
+          onChangeValue(c, "answer")
+        }}
         name="answer"
         editorProps={{ $blockScrolling: true }}
-        value={code}
+        value={question.answer}
       />
-      <button onClick={() => saveQuestion(question)}>save</button>
+      <Link to="/manage-questions" onClick={() => saveQuestion(question)}>save</Link>
     </div >
   )
 }

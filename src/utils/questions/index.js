@@ -103,10 +103,10 @@ function parseQuestionsString(rawQuestions) {
     })
   }
   return questions
+}
 
-  function parseFunction(fn) {
-    return (0, eval)("(" + fn + ")")
-  }
+function parseFunction(fn) {
+  return (0, eval)("(" + fn + ")")
 }
 
 function stringifyQuestionsFile(questions) {
@@ -118,4 +118,4 @@ function stringifyQuestionsFile(questions) {
   })
 }
 
-export { questionsTopics, parseQuestion, parseQuestionsString, stringifyQuestionsFile }
+export { questionsTopics, parseQuestion, parseQuestionsString, stringifyQuestionsFile, parseFunction }

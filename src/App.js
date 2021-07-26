@@ -21,10 +21,10 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/manage" component={ManageHistory} />
           <Route path="/manage-questions" component={ManageQuestions} />
+          <Route path="/edit-question/:subject/:idQuestion" component={EditQuestion} />
           {/*<Route path="/new" component={} /> */}
           <Route exact path="/topics" component={Topics} />
           <Route path="/topics/question/:idQuestion" component={ViewQuestion} />
-          <Route path="/edit-question/:subject/:idQuestion" component={EditQuestion} />
         </Switch>
       </main>
     </HashRouter>
