@@ -1,6 +1,11 @@
 {
   "name": "qped-react",
   "version": "0.1.0",
+  "description": "Educational dynamic questions generator for studying data structures",
+  "author": {
+    "name": "utfpr"
+  },
+  "license": "Creative Commons",
   "private": true,
   "homepage": ".",
   "dependencies": {
