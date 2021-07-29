@@ -29,6 +29,7 @@
   "main": "src/electron-starter.js",
   "scripts": {
     "start": "electron-forge start",
+    "prestart": "yarn run build",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
@@ -67,7 +68,9 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "asar": true
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
