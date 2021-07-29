@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './index.css'
 
 import FluidHeading from "../../components/FluidHeading";
 import SummaryCard from '../../components/SummaryCard'
@@ -6,7 +7,8 @@ import { ExportCard } from '../../components/EventsHistoryActions';
 
 import { runHash } from "../../utils/hash.js"
 
-import './index.css'
+import { repositories } from '../../utils/repositories';
+const repos = repositories()
 
 const Home = () => {
   // The data that will be rendered in the Summary section
@@ -18,8 +20,9 @@ const Home = () => {
 
   useEffect(() => {
     // read list of events from localStorage and store it as a state
-    if (localStorage.getItem('history')) {
-      const eventsList = JSON.parse(localStorage.getItem('history'))
+    const history = repos.getHistory()
+    if (history) {
+      const eventsList = JSON.parse(history)
 
       let practiceCounter = 0
       let correctQuestionsCounter = 0
@@ -45,13 +48,13 @@ const Home = () => {
   const handleExport = () => {
     //TODO: change verification method and feedback
     //verify if localStorage exists
-    if (!localStorage.getItem('history')) {
+    const history = repos.getHistory()
+    if (!history) {
       alert('Não existe histórico ainda. Resolva uma questão e tente novamente.')
       return
     }
 
     const element = document.createElement("a");
-    const history = localStorage.getItem('history')
     const hash = runHash(history)
     const exportHistory = JSON.stringify({ hash, history: JSON.parse(history) })
     const blob = new Blob([exportHistory], { type: 'application/json' }); //pass data from localStorage API to blob

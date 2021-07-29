@@ -1,0 +1,13 @@
+/* Container onde as questoes de um unico topico ficam 
+  Pode existir varias secoes como essa na pagina de Topicos
+*/
+.Topics section.topic {
+  border-radius: 8px;
+  border: var(--mainBorder);
+  background-color: white;
+}
+
+.Topics section.topic a {
+  display: flex;
+  margin-bottom: 0.5em;
+}

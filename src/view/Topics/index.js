@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import TopicSection from "../../components/TopicSection";
+import ImportQuestions from "../../components/ImportQuestions";
 import { HashLink as Link } from "react-router-hash-link";
 import "./index.css";
 // Questions DB
-import { questions as database } from "../../utils/index";
+//import { questions as database } from "../../utils/questions/index";
+import { getParsedQuestions } from "../../utils/questions/helper";
 import topicsHelper from "./topicsHelper"
 const helper = topicsHelper()
 
 const Topics = () => {
+  const [database] = useState(getParsedQuestions())
   const [questions, setQuestions] = useState(database)
 
   const searchOptions = helper.generateSearchOptions({ questions: database })
@@ -28,7 +31,7 @@ const Topics = () => {
     setQuestions(questions)
   }
 
-  return (
+  return Object.keys(database).length > 0 ? (
     <div className="Topics container-fluid px-4">
       <div className="row">
         <aside className="col-lg-auto">
@@ -85,7 +88,9 @@ const Topics = () => {
         </div>
       </div>
     </div>
-  );
+  ) : (
+    <ImportQuestions />
+  )
 }
 
 export default Topics;

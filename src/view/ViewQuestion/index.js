@@ -9,9 +9,12 @@ import { Default, Answered } from "../../components/QuestionActions";
 // Styles
 import "./index.css";
 // Questions DB
-import { rawQuestions, parseQuestion } from "../../utils/index";
+import { parseQuestion } from "../../utils/questions/index";
+import { getParsedQuestions } from "../../utils/questions/helper";
 // Assets
 import { LightningChargeFill } from "../../assets/Icons";
+import { repositories } from "../../utils/repositories";
+const repos = repositories()
 
 /**
  * ViewQuestion
@@ -20,6 +23,7 @@ import { LightningChargeFill } from "../../assets/Icons";
 const ViewQuestion = ({ match }) => {
   const [shouldLoadQuestion, setShouldLoadQuestion] = useState(true)
 
+  const [questions] = useState(getParsedQuestions())
   const [question, setQuestion] = useState({})
 
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null)
@@ -53,8 +57,8 @@ const ViewQuestion = ({ match }) => {
       let idQuestion = match.params.idQuestion
       
       let questionSearched = null
-      Object.keys(rawQuestions).forEach(index => {
-        rawQuestions[index].forEach(question => {
+      Object.keys(questions).forEach(index => {
+        questions[index].forEach(question => {
           if (question.id === idQuestion) questionSearched = question
         }) 
       })
@@ -67,7 +71,7 @@ const ViewQuestion = ({ match }) => {
       setTimer({ startedAt: Math.floor(new Date() / 1000) })
     }
 
-  }, [match.params.subject, match.params.idQuestion, shouldLoadQuestion])
+  }, [match.params.subject, match.params.idQuestion, shouldLoadQuestion, questions])
 
   // Update localStorage with the new event
   const updateStorage = (event) => {
@@ -77,9 +81,9 @@ const ViewQuestion = ({ match }) => {
      - if it does not, create a new array, add the new event and then set it to the localstorage
     */
 
-    let history = JSON.parse(localStorage.getItem('history'))
+    let history = JSON.parse(repos.getHistory())
     let new_history = history ? [...history, event] : [event]
-    localStorage.setItem('history', JSON.stringify(new_history))
+    repos.saveHistory(JSON.stringify(new_history))
   }
   
   // Activates when user tries to answer the question

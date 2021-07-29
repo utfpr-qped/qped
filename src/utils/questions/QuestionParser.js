@@ -1,8 +1,8 @@
 /* eslint-disable */
 /*
   @autor: rivolli
-  @date: 22-04-2020
-  @version: 1.101
+  @date: 22-07-2021
+  @version: 1.102
   @descrition
     Parsing the text of a programing question using variables
 
@@ -118,8 +118,15 @@ export class QuestionParser {
     let xmlDoc = parser.parseFromString("<p_all>" + text + "</p_all>", "text/xml");
     let candidates = xmlDoc.getElementsByTagName("p_all")[0].children;
 
+    //TODO refactor it, because it is not a good solution (it will not work with html code inside the tag)
+    function htmlDecode(input) {
+      var doc = new DOMParser().parseFromString(input, "text/html");
+      return doc.documentElement.textContent;
+    }
+
     for (let i = 0; i < candidates.length; i++) {
       let item = candidates[i];
+      if (item.tagName == "parsererror") continue;
       let variable = "{" + item.tagName + "}";
       if (text.indexOf(variable) > -1 && item.children.length > 0) {
         let option = this._getRandomInt(0, item.children.length - 1);
@@ -131,7 +138,7 @@ export class QuestionParser {
             this.options[item.tagName] = item.children[option].attributes[j].nodeValue;
           }
         }
-        text = text.replace(variable, item.children[option].innerHTML);
+        text = text.replace(variable, htmlDecode(item.children[option].innerHTML));
         text = text.replace(content, "");
       }
     }
@@ -151,6 +158,7 @@ export class QuestionParser {
     let aux = [];
 
     for (let i = 0; i < text.length; i++) {
+
       if (text[i] == '{') {
         if (content.length > 0) {
           aux.push(content);
@@ -336,13 +344,15 @@ export class QuestionParser {
     @return integer or [] - A random value according to the variable definition
   */
   getValue(varname, seed) {
-    let key = varname;
-    if (this.options[key] !== undefined) {
-      return this.options[key];
+    if (this.options[varname] !== undefined) {
+      return this.options[varname];
     }
+
+    let key = this.getTokenId("{"+varname+"}");
     if (seed !== undefined && seed !== null) {
       key += seed;
     }
+    ///console.log(key + " | " + varname + " = " + this.getTokenId("{"+varname+"}"));
 
     if (this.values[key] === undefined) {
       let matched = varname.match("\\[.*]");
@@ -353,7 +363,9 @@ export class QuestionParser {
           idx = parseInt(idx)
         } else {
           if (this.getVariable(idx) !== null) {
-            idx = this.getValue(idx.substring(1, idx.length - 1))
+            let oldidx = idx;
+            idx = this.getValue(idx.substring(1, idx.length - 1), seed)
+            //console.log(varname + "[" + key + ", " + seed + "] " + oldidx + " = " + idx);
           } else {
             //Definition of a Named Variable
           }
@@ -467,6 +479,7 @@ export class QuestionParser {
     (this.tokens.sort((a, b) => b.length - a.length))
       .reverse()
       .forEach(token => {
+        //console.log(token, this.getValue(this.getTokenId(token), this.seed));
         values.push([token, this.getValue(this.getTokenId(token), this.seed)]);
       });
 
@@ -480,7 +493,7 @@ export class QuestionParser {
         content = "";
       }
 
-      text = text.replace(val[0], content);
+      text = text.replaceAll(val[0], content);
     }
     return text;
   }

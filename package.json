@@ -1,6 +1,11 @@
 {
   "name": "qped-react",
   "version": "0.1.0",
+  "description": "Educational dynamic questions generator for studying data structures",
+  "author": {
+    "name": "utfpr"
+  },
+  "license": "Creative Commons",
   "private": true,
   "homepage": ".",
   "dependencies": {
@@ -8,7 +13,9 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/react-syntax-highlighter": "^13.5.1",
+    "electron-squirrel-startup": "^1.0.0",
     "react": "^17.0.2",
+    "react-ace": "^9.4.1",
     "react-dom": "^17.0.2",
     "react-markdown": "^6.0.2",
     "react-router": "^5.2.0",
@@ -19,13 +26,19 @@
     "react-syntax-highlighter": "^15.4.3",
     "web-vitals": "^1.0.1"
   },
+  "main": "src/electron-starter.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "electron-forge start",
+    "prestart": "yarn run build",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preelectron": "yarn run build",
+    "electron": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +59,40 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3"
+    "@electron-forge/cli": "^6.0.0-beta.59",
+    "@electron-forge/maker-deb": "^6.0.0-beta.59",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.59",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.59",
+    "@electron-forge/maker-zip": "^6.0.0-beta.59",
+    "electron": "^13.1.7"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "asar": true
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "qped_react"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }

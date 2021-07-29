@@ -1,10 +1,12 @@
 import { useState } from "react";
 import FluidHeading from "../../components/FluidHeading";
+import { runHash } from "../../utils/hash"
 
 import './index.css'
 
 const ManageHistory = () => {
   const [eventList, setEventList] = useState([])
+  const [integrity, setIntegrity] = useState(null)
 
   const readJSONFile = file => {
     // Check if the file is a JSON
@@ -17,6 +19,7 @@ const ManageHistory = () => {
 
     reader.addEventListener('load', function (e) {
       let parsed = JSON.parse(e.target.result)
+      setIntegrity(runHash(JSON.stringify(parsed.history)) === parsed.hash)
       setEventList(parsed.history)
     })
 
@@ -56,6 +59,17 @@ const ManageHistory = () => {
               </div>
             </header>
 
+            <p>INTEGRITY</p>
+            {
+              // TODO: insert some style
+              integrity === true
+                ? (
+                  <p>true</p>
+                )
+                : (
+                  <p>false</p>
+                )
+            }
             {/* Container for the table wrapper */}
             <div className="table-wrapper">
               <table className="table table-hover table-bordered">
@@ -72,7 +86,7 @@ const ManageHistory = () => {
                   {
                     // Returns rows populated with the data of one Event History file
                     eventList.length ? (
-                      eventList.map(eventItem => {
+                      eventList.map((eventItem, index) => {
                         // format type
                         let type = eventItem.inputLevel
                         let formattedType =
@@ -86,7 +100,7 @@ const ManageHistory = () => {
                         let formattedDate = ((date.getDate())) + "/" + ((date.getMonth() + 1)) + "/" + date.getFullYear()
 
                         return (
-                          <tr>
+                          <tr key={index}>
                             <th scope="row">{eventItem.questionId}</th>
                             <td>{eventItem.isAnswerCorrect ? '✅' : '❌'} {eventItem.userAnswer}</td>
                             <td>{formattedType}</td>
