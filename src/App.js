@@ -9,7 +9,7 @@ import ViewQuestion from "./view/ViewQuestion";
 import Topics from "./view/Topics";
 import EditQuestion from "./view/EditQuestion";
 
-import './index.css';
+import './assets/css/index.css';
 
 function App() {
   return (

@@ -59,6 +59,10 @@ nav div.nav-menu a[aria-current="page"]::before {
   width: 100%;
 }
 
+.nav-footer span a {
+  color: inherit !important;
+}
+
 .nav-footer svg {
   width: 24px;
   height: 24px;

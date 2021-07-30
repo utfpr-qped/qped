@@ -19,7 +19,9 @@ const Navbar = () => {
       </div>
 
       <div className="nav-footer">
-        <span><GithubFill /></span>
+        <span>
+          <a href="https://github.com/utfpr-qped/qped" target="_blank" rel="noreferrer"><GithubFill /></a>
+        </span>
       </div>
     </nav>
   );

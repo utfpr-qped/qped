@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'Nunito';
+  src: url(../fonts/Nunito-Regular.ttf) format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url(../fonts/Nunito-SemiBold.ttf) format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url(../fonts/Nunito-Bold.ttf) format('truetype');
+  font-weight: 700;
+}
+
+:root {
+  --primary: #0d6efd;
+  --secondary: #6C757D;
+  --light: #F8F9FA;
+  --dark: #343A40; /* rename to globalDark */
+  --correct: #6EFF02;
+  --incorrect: #ff1e00;
+  --lightBorder:#e5e5e5;
+  --lightBlue: hsl(216deg, 98%, 75%);
+  --grayishBlue: hsl(210, 20%, 97%);
+  --muted: #6C757D;
+
+  --mainBorder: 2px solid #e5e5e5;
+}
+
+/* * { border: 1px solid salmon; } */
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 
+    "Nunito",
+     /* Cross-platform generic font family (default user interface font) */
+    system-ui,
+    /* Safari for macOS and iOS (San Francisco) */
+    -apple-system,
+    /* Windows */
+    "Segoe UI",
+    /* Android */
+    Roboto,
+    /* Basic web fallback */
+    "Helvetica Neue", Arial,
+    /* Linux */
+    "Noto Sans",
+    "Liberation Sans",
+    /* Sans serif fallback */
+    sans-serif,
+    /* Emoji fonts */
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+  ;
+  color: var(--dark);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 700;
+}
+
+a { text-decoration: none; }
+
+/* Page content */
+main {
+  height: 100%;
+  margin-left: 250px;
+}
