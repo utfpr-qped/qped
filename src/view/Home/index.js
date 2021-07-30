@@ -83,7 +83,9 @@ const Home = () => {
               </h2>
             </header>
             <div className="SummaryCard-wrapper">
-              {summary.map(element => <SummaryCard info={element} />)}
+              {Object.keys(summary).map((key, index) => {
+                return <SummaryCard info={summary[key]} key={key} />
+              })}
             </div>
           </section>
         </div>
