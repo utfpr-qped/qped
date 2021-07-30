@@ -28,8 +28,8 @@
   },
   "main": "src/electron-starter.js",
   "scripts": {
-    "start": "react-scripts start",
-    "predeploy": "yarn run build",
+    "start": "electron-forge start",
+    "prestart": "yarn run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
