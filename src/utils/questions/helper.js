@@ -18,7 +18,7 @@ function parseQuestions(questions) {
 }
 
 function getRemoteQuestions() {
-  const baseUrl = "https://gist.githubusercontent.com/Tashima42/cbb2caafec9fda2934ce782e53f0a5ef/raw/"
+  const baseUrl = "https://raw.githubusercontent.com/utfpr-qped/banco-de-quest-es/main/questions.json"
   const questions = helper.httpGet(baseUrl)
   return questions
 }
