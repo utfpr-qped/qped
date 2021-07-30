@@ -30,6 +30,7 @@
   "scripts": {
     "start": "electron-forge start",
     "prestart": "yarn run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
