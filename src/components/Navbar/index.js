@@ -2,15 +2,8 @@ import { NavLink } from "react-router-dom";
 import './index.css';
 // Assets
 import { GithubFill } from "../../assets/Icons";
-import { repositories } from "../../utils/repositories"
-const repos = repositories()
 
 const Navbar = () => {
-  function cleanQuestions() {
-    repos.saveQuestions("")
-    window.location.reload()
-  }
-
   return (
     <nav className="sidenav">
       <div className="brand">
@@ -23,7 +16,6 @@ const Navbar = () => {
         <NavLink exact to="/topics">Questões</NavLink>
         <NavLink to="/about">Sobre</NavLink>
         <NavLink to="/help">Ajuda</NavLink>
-        <button onClick={() => cleanQuestions()}>limpar questoes</button>
       </div>
 
       <div className="nav-footer">

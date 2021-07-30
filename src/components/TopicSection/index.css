@@ -31,6 +31,11 @@
   transition: ease-in-out 100ms;
 }
 
+.Topic div.questionList .questionItem.createquestion {
+  color: var(--dark);
+  border-bottom-color: var(--dark);
+}
+
 .Topic div.questionList .questionItem:hover {
   color: var(--primary);
   border-color: var(--primary);

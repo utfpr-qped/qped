@@ -14,40 +14,34 @@ const TopicSection = ({ questionList, sectionId, sectionTitle, editSubject, isNe
 
         <div className="col-12">
           <div className="questionList">
-            {
-              isNewTopic ? null : (
-                questionList.map(question =>
-                  <Link
-                    to={`${route}/${question.id}`}
-                    key={question.id}
-                  >
-                    <div className="questionItem">
-                      <div><span className="title">{question.id}</span></div>
-                      <div><span className="level">
-                        {
-                          question.level === 1 ? 'Fácil'
-                            : question.level === 2 ? 'Médio'
-                              : question.level === 3 ? 'Difícil'
-                                : 'Nível'
-                        }
-                      </span></div>
-                    </div>
-                  </Link>
-                )
-              )
-            }
-            {
-              editSubject ? (
+            {!isNewTopic && (
+              questionList.map(question =>
                 <Link
-                  to={`${route}/new`}
+                  to={`${route}/${question.id}`}
+                  key={question.id}
                 >
                   <div className="questionItem">
-                    <div><span className="title">Nova questao</span></div>
-                    <div><span className="level">Nova</span></div>
+                    <div><span className="title">{question.id}</span></div>
+                    <div><span className="level">
+                      {
+                        question.level === 1 ? 'Fácil'
+                          : question.level === 2 ? 'Médio'
+                            : question.level === 3 ? 'Difícil'
+                              : 'Nível'
+                      }
+                    </span></div>
                   </div>
                 </Link>
-              ) : null
-            }
+              )
+            )}
+
+            {editSubject && (
+              <Link to={`${route}/new`}>
+                <div className="questionItem createquestion">
+                  <div><span className="title">Criar Questão</span></div>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </div>

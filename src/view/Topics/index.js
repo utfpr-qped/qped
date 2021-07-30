@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { HashLink as Link } from "react-router-hash-link";
+// Components
 import TopicSection from "../../components/TopicSection";
 import ImportQuestions from "../../components/ImportQuestions";
-import { HashLink as Link } from "react-router-hash-link";
+import { NotFound } from "../../components/FeedbackBoxes"
+// Assets and styles
 import "./index.css";
-// Questions DB
-//import { questions as database } from "../../utils/questions/index";
+// Utils
+// Questions database
 import { getParsedQuestions } from "../../utils/questions/helper";
 import topicsHelper from "./topicsHelper"
 const helper = topicsHelper()
@@ -31,7 +34,7 @@ const Topics = () => {
     setQuestions(questions)
   }
 
-  return Object.keys(database).length > 0 ? (
+  return (
     <div className="Topics container-fluid px-4">
       <div className="row">
         <aside className="col-lg-auto">
@@ -58,6 +61,10 @@ const Topics = () => {
               <Link to="#">Árvore binária</Link>
               <Link to="#">Árvore binária de busca</Link>
             </div>
+
+            <div className="mb-4">
+              <ImportQuestions />
+            </div>
           </div>
         </aside>
 
@@ -67,29 +74,33 @@ const Topics = () => {
               <h2 className="h5 mb-4 text-muted">Lista de questões</h2>
 
               {
-                Object.keys(questions).map((topic, index) => {
-                  return <TopicSection
-                    questionList={questions[topic]}
-                    sectionId={topic}
-                    sectionTitle={
-                      topic === 'sortingAlgorithms' ? 'Algoritmos de ordenação'
-                        : topic === 'searchingAlgorithms' ? 'Algoritmos de busca'
-                          : topic === 'stack' ? 'Pilha estática e dinâmica'
-                            : topic === 'queue' ? 'Fila'
-                              : topic === 'linkedList' ? 'Lista encadeada'
-                                : "Outros"
-                    }
-                    key={index}
-                  />
-                })
+                Object.keys(questions).length > 0
+                  ? Object.keys(questions).map((topic, index) => {
+                    return (
+
+                      <TopicSection
+                        questionList={questions[topic]}
+                        sectionId={topic}
+                        sectionTitle={
+                          topic === 'sortingAlgorithms' ? 'Algoritmos de ordenação'
+                            : topic === 'searchingAlgorithms' ? 'Algoritmos de busca'
+                              : topic === 'stack' ? 'Pilha estática e dinâmica'
+                                : topic === 'queue' ? 'Fila'
+                                  : topic === 'linkedList' ? 'Lista encadeada'
+                                    : "Outros"
+                        }
+                        key={index}
+                      />
+                    )
+                  }) : (
+                    <NotFound />
+                  )
               }
             </div>
           </div>
         </div>
       </div>
     </div>
-  ) : (
-    <ImportQuestions />
   )
 }
 

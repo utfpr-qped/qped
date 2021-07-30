@@ -1,13 +1,45 @@
-/* Container onde as questoes de um unico topico ficam 
-  Pode existir varias secoes como essa na pagina de Topicos
-*/
-.Topics section.topic {
-  border-radius: 8px;
-  border: var(--mainBorder);
-  background-color: white;
+.ManageQuestions aside {
+  padding-top: 2rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid var(--lightBorder);
 }
 
-.Topics section.topic a {
+.ManageQuestions aside .body {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.ManageQuestions .menu-topics {
+  min-width: 255px;
   display: flex;
-  margin-bottom: 0.5em;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1.2rem;
+  border: 1px solid var(--lightBorder);
+  border-radius: 8px;
+}
+
+.ManageQuestions .menu-topics a {
+  color: var(--dark);
+  line-height: 2.1rem !important;
+}
+
+.ManageQuestions .menu-topics a:hover {
+  text-decoration: underline;
+}
+
+.ManageQuestions .topicsList {
+  max-width: 1000px;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .ManageQuestions aside {
+    max-width: 350px;
+    border-right-color: var(--lightBorder);
+    border-bottom-color: transparent;
+  }
 }

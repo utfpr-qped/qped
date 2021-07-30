@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   padding: 1.5rem 1.2rem;
   border: 1px solid var(--lightBorder);
   border-radius: 8px;
@@ -37,6 +38,7 @@
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .Topics aside {
+    max-width: 350px;
     border-right-color: var(--lightBorder);
     border-bottom-color: transparent;
   }

@@ -104,7 +104,7 @@ const Home = () => {
               </h2>
             </header>
             <div className="HistoryCard-wrapper">
-              <ExportCard handleExport={handleExport} />
+              <ExportCard text="Exporte um arquivo contendo um histórico completo das atividades resolvidas." handleExport={handleExport} />
             </div>
           </section>
         </div>

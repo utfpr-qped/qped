@@ -1,11 +1,41 @@
+import { useState } from "react";
+
 const NewTopicSection = ({ handleNewTopic }) => {
-  let topic = ""
+  const [topicName, setTopicName] = useState('');
+  const [feedbackMsg, setFeedbackMsg] = useState(null);
+
   return (
-    <section className="topic p-4 pb-3 mb-3">
-      <input className="h4 mb-3" placeholder="Novo tópico" onChange={(e) => topic = e.target.value}></input>
-      <button onClick={() => handleNewTopic(topic)}>Adicionar</button>
-    </section>
+    <div>
+      <div className="input-group">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Nome do tópico"
+          aria-label="Novo tópico"
+          aria-describedby="button-newtopic"
+          value={topicName || ''}
+          onChange={(e) => setTopicName(e.target.value)}
+        />
+        <button
+          className={`btn ${!feedbackMsg ? "btn-secondary" : "btn-success"}`}
+          type="button"
+          id="button-newtopic"
+          onClick={() => {
+            if(topicName) {
+              handleNewTopic(topicName)
+              setTopicName("")
+              setFeedbackMsg("Adicionado")
+              setTimeout(() => {
+                setFeedbackMsg(null)
+              }, 1000);
+            }
+          }}
+        >
+          {feedbackMsg || "Adicionar"}
+        </button>
+      </div>
+    </div>
   );
-}
+};
 
 export default NewTopicSection;

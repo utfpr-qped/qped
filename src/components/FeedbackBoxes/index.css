@@ -1,0 +1,13 @@
+/* ! Box for displaying a message for the user */
+.feedbackMsg-wrapper {
+  padding: 1.2rem;
+
+  border-radius: 8px;
+  background-color: var(--grayishBlue);
+}
+
+.feedbackMsg-wrapper p {
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0;
+}
