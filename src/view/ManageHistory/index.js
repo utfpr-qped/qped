@@ -58,14 +58,9 @@ const ManageHistory = () => {
                 <input type="file" id="uploadButton" onChange={handleChange} accept=".json" hidden />
               </div>
             </header>
-
-            {
-              integrity && (
-                integrity === true
-                  ? (<p>✅ Tudo certo! O conteúdo do arquivo não foi alterado.</p>)
-                  : (<p>❌ Cuidado, parece que o conteúdo do arquivo foi alterado.</p>)
-              )
-            }
+            
+            { integrity === true && (<p>✅ Tudo certo! O conteúdo do arquivo não foi alterado.</p>) }
+            { integrity === false && (<p>❌ Cuidado, parece que o conteúdo do arquivo foi alterado.</p>) }
 
             {/* Container for the table wrapper */}
             <div className="table-wrapper">
