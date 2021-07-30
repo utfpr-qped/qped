@@ -12,10 +12,10 @@ const Navbar = () => {
       </div>
 
       <div className="nav-menu">
-        <NavLink exact to="/">Início</NavLink>
+        <NavLink exact to="/">Painel</NavLink>
         <NavLink exact to="/topics">Questões</NavLink>
-        <NavLink to="/about">Sobre</NavLink>
-        <NavLink to="/help">Ajuda</NavLink>
+        <NavLink exact to="/manage">Configurações</NavLink>
+        <NavLink exact to="/manage-questions">Editor</NavLink>
       </div>
 
       <div className="nav-footer">

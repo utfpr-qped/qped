@@ -22,7 +22,6 @@ function App() {
           <Route path="/manage" component={ManageHistory} />
           <Route path="/manage-questions" component={ManageQuestions} />
           <Route path="/edit-question/:subject/:idQuestion" component={EditQuestion} />
-          {/*<Route path="/new" component={} /> */}
           <Route exact path="/topics" component={Topics} />
           <Route path="/topics/question/:idQuestion" component={ViewQuestion} />
         </Switch>

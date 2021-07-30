@@ -58,8 +58,8 @@ const Topics = () => {
               <Link to="#stack">Pilha estática e dinâmica</Link>
               <Link to="#queue">Fila</Link>
               <Link to="#linkedList">Lista encadeada</Link>
-              <Link to="#">Árvore binária</Link>
-              <Link to="#">Árvore binária de busca</Link>
+              <Link to="#tree">Árvore binária</Link>
+              <Link to="#btree">Árvore binária de busca</Link>
             </div>
 
             <div className="mb-4">
@@ -87,7 +87,9 @@ const Topics = () => {
                               : topic === 'stack' ? 'Pilha estática e dinâmica'
                                 : topic === 'queue' ? 'Fila'
                                   : topic === 'linkedList' ? 'Lista encadeada'
-                                    : "Outros"
+                                    : topic === 'tree' ? 'Árvore binária'
+                                      : topic === 'btree' ? 'Árvore binária de busca'
+                                        : "Outros"
                         }
                         key={index}
                       />

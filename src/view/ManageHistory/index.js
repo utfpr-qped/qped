@@ -36,7 +36,7 @@ const ManageHistory = () => {
 
   return (
     <>
-      <FluidHeading title={"Gerenciar"} />
+      <FluidHeading title={"Configurações"} />
 
       <div className="ManageHistory container-fluid">
         <div className="row">
@@ -59,17 +59,14 @@ const ManageHistory = () => {
               </div>
             </header>
 
-            <p>INTEGRITY</p>
             {
-              // TODO: insert some style
-              integrity === true
-                ? (
-                  <p>true</p>
-                )
-                : (
-                  <p>false</p>
-                )
+              integrity && (
+                integrity === true
+                  ? (<p>✅ Tudo certo! O conteúdo do arquivo não foi alterado.</p>)
+                  : (<p>❌ Cuidado, parece que o conteúdo do arquivo foi alterado.</p>)
+              )
             }
+
             {/* Container for the table wrapper */}
             <div className="table-wrapper">
               <table className="table table-hover table-bordered">
