@@ -60,8 +60,8 @@ const ManageQuestions = () => {
               <Link to="#stack">Pilha estática e dinâmica</Link>
               <Link to="#queue">Fila</Link>
               <Link to="#linkedList">Lista encadeada</Link>
-              <Link to="#">Árvore binária</Link>
-              <Link to="#">Árvore binária de busca</Link>
+              <Link to="#tree">Árvore binária</Link>
+              <Link to="#btree">Árvore binária de busca</Link>
             </div>
 
             <div className="mb-4">
@@ -91,17 +91,14 @@ const ManageQuestions = () => {
                         questionList={questions[topic]}
                         sectionId={topic}
                         sectionTitle={
-                          topic === "sortingAlgorithms"
-                            ? "Algoritmos de ordenação"
-                            : topic === "searchingAlgorithms"
-                            ? "Algoritmos de busca"
-                            : topic === "stack"
-                            ? "Pilha estática e dinâmica"
-                            : topic === "queue"
-                            ? "Fila"
-                            : topic === "linkedList"
-                            ? "Lista encadeada"
-                            : topic
+                          topic === 'sortingAlgorithms' ? 'Algoritmos de ordenação'
+                            : topic === 'searchingAlgorithms' ? 'Algoritmos de busca'
+                              : topic === 'stack' ? 'Pilha estática e dinâmica'
+                                : topic === 'queue' ? 'Fila'
+                                  : topic === 'linkedList' ? 'Lista encadeada'
+                                    : topic === 'tree' ? 'Árvore binária'
+                                      : topic === 'btree' ? 'Árvore binária de busca'
+                                        : "Outros"
                         }
                         editSubject={topic}
                         key={index}
