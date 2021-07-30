@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import TopicSection from "../../components/TopicSection";
 import NewTopicSection from "../../components/NewTopicSection";
 import ImportQuestions from "../../components/ImportQuestions";
-import { HashLink as Link } from "react-router-hash-link";
 import { ExportCard } from "../../components/EventsHistoryActions";
 import "./index.css";
 // Questions DB
@@ -45,25 +44,15 @@ const ManageQuestions = () => {
       <div className="row">
         <aside className="col-lg-auto">
           <header className="mb-4">
-            <h1 className="h3 mb-4">Gerenciar Questões</h1>
-
-            <NewTopicSection
-              handleNewTopic={(title) => handleNewTopic(title)}
-            />
+            <h1 className="h3 mb-3">Configurar</h1>
+            <p>Importe um arquivo de questões para visualizar, editar, criar ou exportar.</p>
           </header>
 
           <div className="body">
-            <div className="menu-topics">
-              <span className="h6 text-muted">Tópicos</span>
-              <Link to="#sortingAlgorithms">Algoritmos de ordenação</Link>
-              <Link to="#searchingAlgorithms">Algoritmos de busca</Link>
-              <Link to="#stack">Pilha estática e dinâmica</Link>
-              <Link to="#queue">Fila</Link>
-              <Link to="#linkedList">Lista encadeada</Link>
-              <Link to="#tree">Árvore binária</Link>
-              <Link to="#btree">Árvore binária de busca</Link>
+            <div className="mb-3">
+              <NewTopicSection handleNewTopic={(title) => handleNewTopic(title)} />
             </div>
-
+            
             <div className="mb-4">
               <ImportQuestions />
             </div>

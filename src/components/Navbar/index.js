@@ -14,8 +14,8 @@ const Navbar = () => {
       <div className="nav-menu">
         <NavLink exact to="/">Painel</NavLink>
         <NavLink exact to="/topics">Questões</NavLink>
-        <NavLink exact to="/manage">Configurações</NavLink>
-        <NavLink exact to="/manage-questions">Editor</NavLink>
+        <NavLink exact to="/manage">Histórico</NavLink>
+        <NavLink exact to="/manage-questions">Configurar</NavLink>
       </div>
 
       <div className="nav-footer">

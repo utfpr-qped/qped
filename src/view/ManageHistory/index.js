@@ -27,7 +27,6 @@ const ManageHistory = () => {
   }
 
   const handleChange = e => {
-    //TODO: should data of the file uploaded be stored in localStorage or global state to be used later?
     //returns list of files uploaded by the user during that session
     const fileList = e.target.files
     //get only file uploaded by accessing index 0 of the FileList array, returns a File object
@@ -36,7 +35,7 @@ const ManageHistory = () => {
 
   return (
     <>
-      <FluidHeading title={"Configurações"} />
+      <FluidHeading title={"Histórico"} />
 
       <div className="ManageHistory container-fluid">
         <div className="row">
@@ -59,8 +58,8 @@ const ManageHistory = () => {
               </div>
             </header>
             
-            { integrity === true && (<p>✅ Tudo certo! O conteúdo do arquivo não foi alterado.</p>) }
-            { integrity === false && (<p>❌ Cuidado, parece que o conteúdo do arquivo foi alterado.</p>) }
+            { integrity === true && (<p>☑ Tudo certo! O conteúdo do arquivo não foi alterado.</p>) }
+            { integrity === false && (<p>⚠ Cuidado, parece que o conteúdo do arquivo foi alterado.</p>) }
 
             {/* Container for the table wrapper */}
             <div className="table-wrapper">
@@ -94,7 +93,7 @@ const ManageHistory = () => {
                         return (
                           <tr key={index}>
                             <th scope="row">{eventItem.questionId}</th>
-                            <td>{eventItem.isAnswerCorrect ? '✅' : '❌'} {eventItem.userAnswer}</td>
+                            <td>{eventItem.isAnswerCorrect ? '✔' : '❌'} {eventItem.userAnswer}</td>
                             <td>{formattedType}</td>
                             <td>{Math.round(eventItem.timeSpent / 60)}</td>
                             <td>{formattedDate}</td>

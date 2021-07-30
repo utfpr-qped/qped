@@ -65,7 +65,7 @@ const Home = () => {
 
   return (
     <>
-      <FluidHeading title={"Início"} />
+      <FluidHeading title={"Painel"} />
 
       <div className="Home container-fluid">
         <div className="row">

@@ -8,12 +8,13 @@
 
 /* ? Summary section */
 
-/* TODO: create a grid system for each card item */
 .SummaryCard-wrapper {
   display: flex;
   flex-direction: row;
-  
-  gap: 1rem; /*does not work if it is not grid*/
+}
+
+.SummaryCard-wrapper > * {
+  margin-right: 1rem;
 }
 
 /* ? History section */
