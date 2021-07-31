@@ -8,6 +8,9 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-dracula";
 
+import Stackedit from 'stackedit-js';
+import { useStackEdit } from "use-stackedit";
+
 import {
   getParsedQuestions,
   setParsedQuestions,
@@ -24,6 +27,9 @@ const EditQuestion = ({ match }) => {
   const [questions] = useState(getParsedQuestions());
   const [question, setQuestion] = useState({});
   const [subject] = useState(match.params.subject);
+
+  const [value, setValue] = useState("");
+  const { openStackedit, onFileChange } = useStackEdit(setValue);
 
   function saveQuestion(question) {
     const saveQuestions = questions;
@@ -57,13 +63,13 @@ const EditQuestion = ({ match }) => {
       const question =
         idQuestion === "new"
           ? {
-              id: "",
-              text: "",
-              answer: functionExample,
-              subject,
-              level: null,
-              keywords: [],
-            }
+            id: "",
+            text: "",
+            answer: functionExample,
+            subject,
+            level: null,
+            keywords: [],
+          }
           : questions[subject].find((e) => e.id === idQuestion);
 
       if (typeof question.answer !== "string") {
@@ -71,6 +77,7 @@ const EditQuestion = ({ match }) => {
       }
 
       setQuestion(question);
+      setValue(question.text);
     }
   }, [subject, match.params.idQuestion, shouldLoadQuestion, questions]);
 
@@ -127,11 +134,25 @@ const EditQuestion = ({ match }) => {
                   id="inputText"
                   aria-describedby="textHelp"
                   rows="5"
-                  defaultValue={question.text}
+                  value={value}
                   onChange={(e) => {
-                    onChangeValue(e.target.value, "text");
+                    setValue(e.target.value);
+                    // If textarea is edited run the file change event on stackedit
+                    onFileChange();
                   }}
                 />
+                <button
+                  onClick={() => {
+                    openStackedit({
+                      content: {
+                        // Markdown content.
+                        text: value,
+                      },
+                    });
+                  }}
+                >
+                  Open Editor
+                </button>
                 <div id="textHelp" className="form-text">
                   Escreva o enunciado da questão em formato Markdown.
                 </div>
@@ -157,10 +178,10 @@ const EditQuestion = ({ match }) => {
                     {question.level === 1
                       ? "Fácil"
                       : question.level === 2
-                      ? "Médio"
-                      : question.level === 3
-                      ? "Difícil"
-                      : "Selecione"}
+                        ? "Médio"
+                        : question.level === 3
+                          ? "Difícil"
+                          : "Selecione"}
                   </option>
                   <option value={1}>Fácil</option>
                   <option value={2}>Médio</option>

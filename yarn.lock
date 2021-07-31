@@ -12428,6 +12428,11 @@ stack-utils@^2.0.2:
   dependencies:
     escape-string-regexp "^2.0.0"
 
+stackedit-js@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/stackedit-js/-/stackedit-js-1.0.7.tgz#2ee22dd3aa78140fbb81926f01a4308e8e967bf0"
+  integrity sha512-FG2MNncXlSEscwBa3Ih6Xl1zrbeJ8/vgbrbzwwLvkdgFIMCRZQzpFpqxSW2o/1AvxguhXrt2dml/Z/I1m5eoLg==
+
 stackframe@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.2.0.tgz#52429492d63c62eb989804c11552e3d22e779303"
@@ -13480,6 +13485,13 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-stackedit@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/use-stackedit/-/use-stackedit-1.0.6.tgz#a7e7ad7d9ba26439b29b7a9a11d4773b60deba83"
+  integrity sha512-3GT+LOEJDzd/YqcSoeqTUPKrxT/5S8BgluBfp5VN8oAlf1CEILFojJUmc6fqGbDFVNrLjZmxoz27fpb8uU/fgA==
+  dependencies:
+    stackedit-js "^1.0.7"
 
 use@^3.1.0:
   version "3.1.1"
