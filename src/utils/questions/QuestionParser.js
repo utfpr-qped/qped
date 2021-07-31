@@ -116,7 +116,11 @@ export class QuestionParser {
   parseOptions(text) {
     let parser = new DOMParser();
     let xmlDoc = parser.parseFromString("<p_all>" + text + "</p_all>", "text/xml");
-    let candidates = xmlDoc.getElementsByTagName("p_all")[0].children;
+    const elementsByTagName = xmlDoc.getElementsByTagName("p_all");
+    if(elementsByTagName.length === 0) {
+      return text
+    }
+    let candidates = elementsByTagName[0].children;
 
     //TODO refactor it, because it is not a good solution (it will not work with html code inside the tag)
     function htmlDecode(input) {
@@ -142,7 +146,6 @@ export class QuestionParser {
         text = text.replace(content, "");
       }
     }
-
     return text;
   }
 
