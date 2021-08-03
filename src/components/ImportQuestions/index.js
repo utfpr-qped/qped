@@ -1,4 +1,4 @@
-import { setParsedQuestions, getRemoteQuestions } from "../../utils/questions/helper";
+import { setParsedQuestions } from "../../utils/questions/helper";
 import { ImportCard } from "../EventsHistoryActions";
 
 const ImportQuestions = () => {
@@ -22,15 +22,9 @@ const ImportQuestions = () => {
     readJSONFile(fileList[0])
   }
 
-  function getRemote() {
-    setParsedQuestions(getRemoteQuestions())
-    window.location.reload()
-  }
-
   return (
     <ImportCard 
       handleFileUpload={handleFileUpload} 
-      getRemote={getRemote} 
       text="Importe um arquivo que contém o banco de questões mais atualizado." 
     />
   );

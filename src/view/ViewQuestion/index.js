@@ -53,14 +53,14 @@ const ViewQuestion = ({ match }) => {
       setShouldLoadQuestion(false)
 
       setUserInput('')// clear user input
-      
+
       let idQuestion = match.params.idQuestion
-      
+
       let questionSearched = null
       Object.keys(questions).forEach(index => {
         questions[index].forEach(question => {
           if (question.id === idQuestion) questionSearched = question
-        }) 
+        })
       })
 
       let question = parseQuestion(questionSearched)
@@ -85,13 +85,13 @@ const ViewQuestion = ({ match }) => {
     let new_history = history ? [...history, event] : [event]
     repos.saveHistory(JSON.stringify(new_history))
   }
-  
+
   // Activates when user tries to answer the question
   const handleQuestionAnswered = () => {
     // get the current time, then subtract it by the time the user started to solve the question
     // then return the total time in seconds, which is also the time spent in total
     let secondsInTotal = (Math.floor(new Date() / 1000)) - (timer.startedAt)
-    
+
     setDidUserAnswer(true)
 
     // get the correct answer for that question
@@ -122,7 +122,7 @@ const ViewQuestion = ({ match }) => {
       date: new Date(),
       timeSpent: secondsInTotal
     }
-    
+
     // save event to localStorage
     updateStorage(event)
 

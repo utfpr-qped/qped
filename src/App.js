@@ -8,6 +8,7 @@ import ManageQuestions from "./view/ManageQuestions";
 import ViewQuestion from "./view/ViewQuestion";
 import Topics from "./view/Topics";
 import EditQuestion from "./view/EditQuestion";
+import ListDatabases from "./view/ListDatabases";
 
 import './assets/css/index.css';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/edit-question/:subject/:idQuestion" component={EditQuestion} />
           <Route exact path="/topics" component={Topics} />
           <Route path="/topics/question/:idQuestion" component={ViewQuestion} />
+          <Route path="/list" component={ListDatabases} />
         </Switch>
       </main>
     </HashRouter>

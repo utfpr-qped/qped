@@ -1,0 +1,29 @@
+.EventsHistoryActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  
+  padding: 1.2rem;
+
+  border-radius: 8px;
+  background-color: var(--grayishBlue);
+  border: 2px solid var(--lightBorder);
+}
+
+.EventsHistoryActions .desc {
+  /* width: 70%; */
+  margin-bottom: 1rem;
+}
+
+.EventsHistoryActions .actions {
+  /* width: 30%; */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.EventsHistoryActions p {
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0;
+}
